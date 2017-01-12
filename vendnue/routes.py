@@ -1,5 +1,5 @@
 from . import api
-import controllers
+from controllers import auth
 
 def add_resources():
-    pass
+    api.add_resource(auth.Signup, '/auth/signup')
