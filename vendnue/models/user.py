@@ -21,7 +21,7 @@ class User(db.Model):
 
     @staticmethod
     def create_user(first_name, last_name, email, plaintext_password):
-        hashed_password = User.get_hased_password(plaintext_password)
+        hashed_password = User.get_hashed_password(plaintext_password)
         new_user = User(first_name=first_name,
                 last_name=last_name,
                 email=email,
@@ -43,7 +43,7 @@ class User(db.Model):
         return bcrypt.checkpw(plaintext_password, hashed_password)
 
     @staticmethod
-    def get_user_by_email(email_input):
-        return User.query.filter_by(email=email_input).first()
+    def get_user_by_email(email):
+        return User.query.filter_by(email=email).first()
 
 

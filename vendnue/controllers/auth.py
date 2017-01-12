@@ -1,3 +1,4 @@
+from flask import request
 from flask_restful import Resource
 from ..models import user
 from ..utils import *
@@ -7,7 +8,7 @@ class Signup(Resource):
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         email = request.form['email']
-        password = request.form['password']
+        plaintext_password = request.form['password']
 
         user_exists = user.User.get_user_by_email(email)
         if user_exists:
