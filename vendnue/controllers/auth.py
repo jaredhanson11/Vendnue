@@ -33,7 +33,7 @@ class Login(Resource):
     def post(self):
         email = request.form['email']
         plaintext_password = request.form['password']
-        
+
         user_exists = user.User.get_user_by_email(email)
         if user_exists:
             # now check if email and password combination in exist
@@ -42,7 +42,7 @@ class Login(Resource):
             if passwords_match:
                 user_id = user_exists.id
                 session['user_id'] = user_id
-                user.User.set_last_login(user_exists)
+                user_exists.set_last_login()
                 data = {'user_id':user_id, 'email':email}
                 return responses.success(data,200)
             else:
@@ -50,9 +50,12 @@ class Login(Resource):
         else:
             return responses.error('This email is not in use.', 422)
 
+
 class Logout(Resource):
-    def post(self):
+    def get(self):
         user_was_logged_in = session.pop('user_id', None)
         if user_was_logged_in:
             data = {'message':'Successfully logged out.'}
             return responses.success(data, 200)
+        else:
+            return responses.error('No user was logged in.', 401)

@@ -46,3 +46,7 @@ class User(db.Model):
     @staticmethod
     def get_user_by_email(email):
         return User.query.filter_by(email=email).first()
+
+    def set_last_login(self):
+        self.last_login = datetime.utcnow()
+        db.session.commit()
