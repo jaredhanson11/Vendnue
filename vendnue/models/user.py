@@ -1,4 +1,5 @@
 from datetime import datetime
+from sqlalchemy import and_
 
 import bcrypt
 
@@ -45,5 +46,3 @@ class User(db.Model):
     @staticmethod
     def get_user_by_email(email):
         return User.query.filter_by(email=email).first()
-
-
