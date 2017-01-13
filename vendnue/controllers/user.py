@@ -1,4 +1,4 @@
-from flask import request, session
+from flask import request
 from flask_restful import Resource
 from flask_login import login_required, current_user
 from ..models import user
