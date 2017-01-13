@@ -1,9 +1,9 @@
 from datetime import datetime
-from sqlalchemy import and_
 
 import bcrypt
 
-from . import db
+from . import db, login_manager
+from ..utils import *
 
 class User(db.Model):
     '''
@@ -18,6 +18,21 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     last_login = db.Column(db.DateTime, default=datetime.utcnow)
     confirmed = db.Column(db.Boolean, default=False)
+
+    ######################## Flask-Login #########################
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_annonymous(self):
+        return False
+
+    def get_id(self):
+        return unicode(self.id)
+
+    ####################### End Flask-Login ######################
 
 
     @staticmethod
@@ -50,3 +65,12 @@ class User(db.Model):
     def set_last_login(self):
         self.last_login = datetime.utcnow()
         db.session.commit()
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return responses.error('No user was logged in.', 401)
