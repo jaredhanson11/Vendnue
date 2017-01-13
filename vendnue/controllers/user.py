@@ -7,9 +7,9 @@ from ..utils import *
 class User(Resource):
     decorators = [login_required]
 
-    def get(self, id):
+    def get(self, user_id):
         # You can only get the information for your own profile
-        if current_user.id != id:
+        if current_user.id != user_id:
             return responses.error('Permission denied', 403)
 
         user_data = {
