@@ -10,3 +10,4 @@ class Venue(db.Model):
     description = db.Column(db.String(250))
     city = db.Column(db.String(75))
     state = db.Column(db.String(75))
+    concerts = db.relationship('Concert', backref='venue', lazy='dynamic')
