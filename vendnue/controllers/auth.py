@@ -30,8 +30,8 @@ class Signup(Resource):
 
 class Login(Resource):
     def post(self):
-        email = request.form['email']
-        plaintext_password = request.form['password']
+        email = str(request.form['email'])
+        plaintext_password = str(request.form['password'])
 
         user_exists = user.User.get_user_by_email(email)
         if user_exists:
