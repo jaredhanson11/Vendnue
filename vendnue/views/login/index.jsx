@@ -10,7 +10,7 @@ var dropdownNames = ['Sign in','My Hub','Gift Codes','Settings'];
 
 ReactDOM.render(
     <div>
-    <LoginPage names={names} links={links} dropdownNames={dropdownNames} />
+    <LoginPage names={names} links={links} dropdownNames={dropdownNames} /> 
     </div>,
     document.getElementById('main')
 );

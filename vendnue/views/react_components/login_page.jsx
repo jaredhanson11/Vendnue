@@ -1,5 +1,5 @@
 import React from 'react';
-import apiUtils from './api_utils.js'
+// import apiUtils from './api_utils.js'
 import NavbarContainer from './navbar_container.jsx'
 
 export default class LoginPage extends React.Component {

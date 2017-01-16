@@ -3,8 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        login: './login/index.js',
-        example: './example/index.js'
+        login: './login/index.jsx',
     },
     output: {
         path: path.join(__dirname, 'static', 'js'),

@@ -1,5 +1,5 @@
 import React from 'react';
-import apiUtils from './api_utils.js';
+// import apiUtils from './api_utils.js';
 import Dropdown from './dropdown.jsx';
 
 export default class NavbarContainer extends React.Component {
