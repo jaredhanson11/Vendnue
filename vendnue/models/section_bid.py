@@ -7,9 +7,9 @@ class Section_Bid(db.Model):
     '''
     __tablename__ = 'section_bids'
     id = db.Column(db.Integer, primary_key=True)
-    event_id = db.Column(db.Integer, db.ForeignKey('concerts.id'))
+    concert_id = db.Column(db.Integer, db.ForeignKey('concerts.id'))
     section_id = db.Column(db.Integer, db.ForeignKey('sections.id'))
-    num_ticets = db.Column(db.Integer)
+    num_tickets = db.Column(db.Integer)
     price_per_ticket = db.Column(db.Float)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     # concert through backref

@@ -11,7 +11,7 @@ class Concert(db.Model):
     date = db.Column(db.DateTime)
     venue_id = db.Column(db.Integer, db.ForeignKey('venues.id'))
     # venue through backref
-    map_id = db.Column(db.Integer, db.ForeignKey('maps.id'))
+    map = db.relationship('Map', backref='concert', uselist=False)
     artists_performing = db.relationship('Artist', secondary=concerts_to_artists, backref=db.backref('concerts', lazy='dynamic'))
     tickets = db.relationship('Ticket', backref='concert', lazy='dynamic')
     section_bids = db.relationship('Section_Bid', backref='concert', lazy='dynamic')
