@@ -3,8 +3,9 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
+        main: './index.jsx',
         login: './login/index.jsx',
-	signup: './signup/index.jsx',
+        signup: './signup/index.jsx',
     },
     output: {
         path: path.join(__dirname, 'static', 'js'),
