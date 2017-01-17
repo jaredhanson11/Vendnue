@@ -54,9 +54,13 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _signup_page = __webpack_require__(181);
+	var _navbar_container = __webpack_require__(179);
 
-	var _signup_page2 = _interopRequireDefault(_signup_page);
+	var _navbar_container2 = _interopRequireDefault(_navbar_container);
+
+	var _signup_form = __webpack_require__(184);
+
+	var _signup_form2 = _interopRequireDefault(_signup_form);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -64,11 +68,13 @@
 	var names = ['Vendnue', 'Find Events', 'Sell Tickets', 'My Tickets', 'Login', 'Sign Up'];
 	var links = ['#', '#', '#', '#', '/login', '/signup'];
 	var dropdownNames = ['Sign in', 'My Hub', 'Gift Codes', 'Settings'];
+	var searchPlaceholder = 'Search for genres, artists, teams, or venues';
 
 	_reactDom2.default.render(_react2.default.createElement(
 	    'div',
 	    null,
-	    _react2.default.createElement(_signup_page2.default, { names: names, links: links, dropdownNames: dropdownNames })
+	    _react2.default.createElement(_navbar_container2.default, null),
+	    _react2.default.createElement(_signup_form2.default, { searchPlaceholder: searchPlaceholder, names: names, links: links, dropdownNames: dropdownNames })
 	), document.getElementById('main'));
 
 /***/ },
@@ -21526,6 +21532,10 @@
 
 	var _dropdown2 = _interopRequireDefault(_dropdown);
 
+	var _searchbar = __webpack_require__(181);
+
+	var _searchbar2 = _interopRequireDefault(_searchbar);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21547,7 +21557,8 @@
 	        _this.state = {
 	            names: props.names,
 	            links: props.links,
-	            dropdownNames: props.dropdownNames
+	            dropdownNames: props.dropdownNames,
+	            searchPlaceholder: props.searchPlaceholder
 	        };
 	        return _this;
 	    }
@@ -21571,11 +21582,11 @@
 	                    )
 	                );
 	            });
-
 	            return _react2.default.createElement(
 	                'ul',
 	                null,
 	                nameStateBar,
+	                _react2.default.createElement(_searchbar2.default, { searchPlaceholder: this.state.searchPlaceholder }),
 	                _react2.default.createElement(_dropdown2.default, { dropdownNames: this.state.dropdownNames })
 	            );
 	        }
@@ -21667,6 +21678,75 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// import apiUtils from './api_utils.js'
+
+	var Searchbar = function (_React$Component) {
+	    _inherits(Searchbar, _React$Component);
+
+	    function Searchbar(props) {
+	        _classCallCheck(this, Searchbar);
+
+	        var _this = _possibleConstructorReturn(this, (Searchbar.__proto__ || Object.getPrototypeOf(Searchbar)).call(this, props));
+
+	        _this.state = {
+	            value: '',
+	            searchPlaceholder: props.searchPlaceholder
+	        };
+
+	        _this.handleSearch = _this.handleSearch.bind(_this);
+	        return _this;
+	    }
+
+	    // here we call api for autocomplete and we display them in the html
+	    // have to lookup how to display popup for searchbar
+
+
+	    _createClass(Searchbar, [{
+	        key: 'handleSearch',
+	        value: function handleSearch(event) {
+	            this.setState({ 'value': event.target.value });
+	            // const paramsObj = {email: this.state.email, password: this.state.password};
+	            // var response = apiUtils.post('/auth/login', paramsObj);
+	            // validate that it is a successful request
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement('input', { type: 'text', name: 'search', placeholder: this.state.searchPlaceholder, onChange: this.handleSearch });
+	        }
+	    }]);
+
+	    return Searchbar;
+	}(_react2.default.Component);
+
+	exports.default = Searchbar;
+
+/***/ },
+/* 182 */,
+/* 183 */,
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _navbar_container = __webpack_require__(179);
 
 	var _navbar_container2 = _interopRequireDefault(_navbar_container);
@@ -21681,20 +21761,17 @@
 	// import apiUtils from './api_utils.js'
 
 
-	var SignupPage = function (_React$Component) {
-	    _inherits(SignupPage, _React$Component);
+	var SignupForm = function (_React$Component) {
+	    _inherits(SignupForm, _React$Component);
 
-	    function SignupPage(props) {
-	        _classCallCheck(this, SignupPage);
+	    function SignupForm(props) {
+	        _classCallCheck(this, SignupForm);
 
-	        var _this = _possibleConstructorReturn(this, (SignupPage.__proto__ || Object.getPrototypeOf(SignupPage)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (SignupForm.__proto__ || Object.getPrototypeOf(SignupForm)).call(this, props));
 
 	        _this.state = {
 	            email: '',
-	            password: '',
-	            names: props.names,
-	            dropdownNames: props.dropdownNames,
-	            links: props.links
+	            password: ''
 	        };
 
 	        _this.handleEmailChange = _this.handleEmailChange.bind(_this);
@@ -21703,7 +21780,7 @@
 	        return _this;
 	    }
 
-	    _createClass(SignupPage, [{
+	    _createClass(SignupForm, [{
 	        key: 'handleEmailChange',
 	        value: function handleEmailChange(event) {
 	            this.setState({ 'email': event.target.value });
@@ -21719,7 +21796,7 @@
 	            // const paramsObj = {email: this.state.email, password: this.state.password};
 	            // var response = apiUtils.post('/auth/login', paramsObj);
 	            // validate that it is a successful request
-	            this.setState({ dropdownNames: ['My Account', 'Settings'] });
+	            // this.setState({dropdownNames:['My Account','Settings']});
 	        }
 	    }, {
 	        key: 'render',
@@ -21729,38 +21806,27 @@
 	                null,
 	                _react2.default.createElement(_navbar_container2.default, { names: this.state.names, links: this.state.links, dropdownNames: this.state.dropdownNames }),
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-group' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        null,
-	                        'Email address'
-	                    ),
-	                    _react2.default.createElement('input', { type: 'email', name: 'email', value: this.state.email, onChange: this.handleEmailChange, placeholder: 'Enter email' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
+	                    'form',
 	                    null,
 	                    _react2.default.createElement(
 	                        'label',
 	                        null,
-	                        'Password'
+	                        'Email:',
+	                        _react2.default.createElement('input', { type: 'email', value: this.state.email, onChange: this.handleEmailChange }),
+	                        _react2.default.createElement('br', null),
+	                        'Password:',
+	                        _react2.default.createElement('input', { type: 'password', value: this.state.password, onChange: this.handlePasswordChange })
 	                    ),
-	                    _react2.default.createElement('input', { type: 'password', name: 'password', className: 'form-control', value: this.state.password, onChange: this.handlePasswordChange, id: 'exampleInputPassword1', placeholder: 'Password' })
-	                ),
-	                _react2.default.createElement(
-	                    'button',
-	                    { type: 'submit', onClick: this.login },
-	                    'Submit'
+	                    _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
 	                )
 	            );
 	        }
 	    }]);
 
-	    return SignupPage;
+	    return SignupForm;
 	}(_react2.default.Component);
 
-	exports.default = SignupPage;
+	exports.default = SignupForm;
 
 /***/ }
 /******/ ]);

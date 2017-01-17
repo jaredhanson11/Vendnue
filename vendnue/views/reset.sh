@@ -1,0 +1,2 @@
+rm ./static/js/*
+webpack
