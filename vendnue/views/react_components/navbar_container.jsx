@@ -8,10 +8,10 @@ export default class NavbarContainer extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            names: props.names,
-            links:props.links,
+            names: ['Vendnue', 'Find Events','Sell Tickets','My Tickets', 'Login','Sign Up'],
+            links: ['#','#','#','#','/login','/signup'],
             dropdownNames: props.dropdownNames,
-            searchPlaceholder: props.searchPlaceholder
+            searchPlaceholder: 'Search for genres, artists, teams, or venues'
         }
     }
 

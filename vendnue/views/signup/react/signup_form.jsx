@@ -1,6 +1,6 @@
 import React from 'react';
 // import apiUtils from './api_utils.js'
-import NavbarContainer from './navbar_container.jsx'
+import NavbarContainer from '../../react_components/navbar_container.jsx'
 
 export default class SignupForm extends React.Component {
 
@@ -34,7 +34,6 @@ export default class SignupForm extends React.Component {
     render(){
         return (
             <div>
-                <NavbarContainer names={this.state.names} links={this.state.links} dropdownNames={this.state.dropdownNames} />
                 <form>
                     <label>
                     Email:
