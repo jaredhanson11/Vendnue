@@ -1,4 +1,5 @@
 from . import db
+from ..utils import *
 
 class Ticket(db.Model):
     '''
@@ -24,5 +25,5 @@ class Ticket(db.Model):
         try:
             db.session.commit()
         except IntegrityError:
-            return False
-        return True
+            return model_responses.error('there was an integrity error')
+        return model_responses.success({'ticket_id':new_ticket.id})

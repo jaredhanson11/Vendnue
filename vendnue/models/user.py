@@ -47,8 +47,8 @@ class User(db.Model):
         try:
             db.session.commit()
         except IntegrityError:
-            return False
-        return True
+            return model_responses.error('error':'there was an integrity error')
+        return model_responses.success({'user_id':new_user.id})
 
     @staticmethod
     def get_hashed_password(plaintext_password):
