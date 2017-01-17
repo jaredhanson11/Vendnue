@@ -1,5 +1,6 @@
 from datetime import datetime
 from . import db
+from ..utils import *
 
 class Section_Bid(db.Model):
     '''
@@ -10,7 +11,29 @@ class Section_Bid(db.Model):
     concert_id = db.Column(db.Integer, db.ForeignKey('concerts.id'))
     section_id = db.Column(db.Integer, db.ForeignKey('sections.id'))
     num_tickets = db.Column(db.Integer)
-    price_per_ticket = db.Column(db.Float)
+    bid_price_per_ticket = db.Column(db.Float)
+    bid_price_total = db.Column(db.Float)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     # concert through backref
     # section through backref
+
+    @staticmethod
+    def create_section_bid(concert_id, section_id, num_tickets, bid_price_per_ticket):
+        bid_price_total = num_tickets * float(price_per_ticket)
+
+        new_section_bid = Section_Bid(
+                concert_id=concert_id,
+                section_id=section_id,
+                bid_price_per_ticket=bid_price_per_ticket,
+                bid_price_total=bid_price_total,
+                num_tickets=num_tickets
+            )
+        db.session.add(new_section_bid)
+
+        try:
+            db.session.commit()
+        except IntegrityError:
+            return model_responses.error('Integrity error')
+
+        ret = {'section_bid_id': new_section_bid.id}
+        return model_reponses.success(ret)
