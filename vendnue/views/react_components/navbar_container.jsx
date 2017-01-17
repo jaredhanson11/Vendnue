@@ -1,6 +1,7 @@
 import React from 'react';
-import apiUtils from './api_utils.js';
+// import apiUtils from './api_utils.js';
 import Dropdown from './dropdown.jsx';
+import Searchbar from './searchbar.jsx'
 
 export default class NavbarContainer extends React.Component {
 
@@ -10,6 +11,7 @@ export default class NavbarContainer extends React.Component {
             names: props.names,
             links:props.links,
             dropdownNames: props.dropdownNames,
+            searchPlaceholder: props.searchPlaceholder
         }
     }
 
@@ -18,9 +20,9 @@ export default class NavbarContainer extends React.Component {
         var names = this.state.names;
         var dropdownNames = this.state.dropdownNames;
         var nameStateBar = names.map((name, i) => <li key={name}><a href={this.state.links[i]}>{name}</a></li>);
-
         return (<ul>
             {nameStateBar}
+            <Searchbar searchPlaceholder={this.state.searchPlaceholder} />
             <Dropdown dropdownNames={this.state.dropdownNames} />
         </ul>);
     }

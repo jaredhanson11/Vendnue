@@ -1,8 +1,8 @@
 {
-  "name": "simple-example",
+  "name": "Vendnue",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel": "babel",
@@ -15,7 +15,7 @@
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
-    "query-string": "^4.3.0",
+    "query-string": "^4.3.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "webpack": "^1.14.0",
