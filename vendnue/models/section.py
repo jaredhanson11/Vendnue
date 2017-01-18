@@ -17,8 +17,8 @@ class Section(db.Model):
     def create_section(name, map_id):
         new_section = Section(name=name, map_id=map_id)
         db.session.add(new_section)
-        try IntegrityError:
+        try:
             db.session.commit()
-        except:
+        except IntegrityError:
             return model_responses.error('there was an integrity error')
         return model_responses.success({'section_id':new_section.id})
