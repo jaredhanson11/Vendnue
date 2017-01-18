@@ -38,14 +38,18 @@ class Section_Bid(db.Model):
         except IntegrityError:
             return model_responses.error('Integrity error')
 
-        ret = {'section_bid_id': new_section_bid.id}
-        return model_responses.success(ret)
+        obj = {
+            'section_bid': new_section_bid
+        }
+        return model_responses.success(obj)
 
     @staticmethod
     def get_section_bids(section_id):
         section_bids = Section_Bid.query.filter(Section_Bid.section_id == section_id).all()
         if section_bids:
-            ret = {'section_bids' : section_bids}
-            return model_responses.success(ret)
+            objs = {
+                'section_bids' : section_bids
+            }
+            return model_responses.success(objs)
         else:
             return model_responses.error('there are no section bids.')

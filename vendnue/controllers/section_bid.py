@@ -39,12 +39,32 @@ class Section_Bids(Resource):
         except ValueError:
             return responses.error('The post values were not correct.', 422)
 
-        new_section_bid = section_bid.Section_Bid.create_section_bid(bidder_id, concert_id, section_id, num_tickets, bid_price_per_ticket)
+        new_section_bid = section_bid.Section_Bid.create_section_bid(
+            bidder_id=bidder_id,
+            concert_id=concert_id,
+            section_id=section_id,
+            num_tickets=num_tickets,
+            bid_price_per_ticket=bid_price_per_ticket
+        )
         
         if 'error' in new_section_bid:
             return responses.error(new_section_bid['error'], 500)
         else:
-            return responses.success(new_section_bid, 200)
+            section_bid_obj = new_section_bid['section_bid']
+            print new_section_bid
+            print type(section_bid_obj)
+            new_section_bid = {
+                'bidder_id' : section_bid_obj.bidder_id,
+                'concert_id' : section_bid_obj.concert_id,
+                'section_id': section_bid_obj.section_id,
+                'num_tickets' : section_bid_obj.num_tickets,
+                'bid_price_per_ticket' : section_bid_obj.bid_price_per_ticket
+            }
+            data = {
+                'section_bid': new_section_bid
+            }
+
+            return responses.success(data, 200)
 
 
 class Section_Bid(Resource):
