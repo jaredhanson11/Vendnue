@@ -21,7 +21,12 @@ class Ticket(db.Model):
 
         created_tickets = []
         for _ in range(num_tickets):
-            new_ticket = Ticket(concert_id=concert_id, section_id=section_id, price=price_per_ticket, seller_id=seller_id)
+            new_ticket = Ticket(
+                    concert_id=concert_id,
+                    section_id=section_id,
+                    price=price_per_ticket,
+                    seller_id=seller_id
+                )
             db.session.add(new_ticket)
             db.session.flush()
             new_ticket.path_to_tickets = '/' + str(new_ticket.id)
