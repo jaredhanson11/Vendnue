@@ -1,3 +1,5 @@
+from sqlalchemy.exc import IntegrityError
+
 from . import db
 from concert_to_artist import concerts_to_artists
 from ..utils import *

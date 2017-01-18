@@ -1,3 +1,5 @@
+from sqlalchemy.exc import IntegrityError
+
 from . import db
 from ..utils import *
 

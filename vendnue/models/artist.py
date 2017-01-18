@@ -1,4 +1,6 @@
+from sqlalchemy.exc import IntegrityError
 from . import db
+
 
 class Artist(db.Model):
     '''
