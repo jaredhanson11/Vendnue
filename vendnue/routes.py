@@ -15,7 +15,7 @@ def add_resources():
     api.add_resource(concert.Concert, '/concerts/<int:concert_id>')
 
     ### Ticket routes ###
-    api.add_rescource(ticket.Tickets, '/tickets/')
+    api.add_resource(ticket.Tickets, '/tickets/')
 
     ### Section Bid routes ###
     api.add_resource(section_bid.Section_Bids, '/section_bids/')
