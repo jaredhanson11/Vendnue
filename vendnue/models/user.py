@@ -57,7 +57,7 @@ class User(db.Model):
 
     @staticmethod
     def check_password(plaintext_password, hashed_password):
-        return bcrypt.checkpw(plaintext_password.encode('utf-8'), hashed_password)
+        return bcrypt.checkpw(plaintext_password.encode('utf-8'), hashed_password.encode('utf-8'))
 
     @staticmethod
     def get_user_by_email(email):

@@ -8,7 +8,7 @@ from flask_login import login_required, current_user
 class Section_Bids(Resource):
     '''
     URL Endpoint: `/section_bids/`
-    Allowed methods: POST, GET
+    Allowed methods: POST
     '''
     
     decorators = [login_required]
@@ -37,7 +37,7 @@ class Section_Bids(Resource):
             return responses.error('The post keys were not corect.', 400)
         except ValueError:
             return responses.error('The post values were not correct.', 422)
-            
+        print bid_price_per_ticket
         new_section_bid = section_bid.Section_Bid.create_section_bid(concert_id, section_id, num_tickets, bid_price_per_ticket)
         
         if 'error' in new_section_bid:

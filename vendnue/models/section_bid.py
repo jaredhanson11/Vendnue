@@ -20,7 +20,7 @@ class Section_Bid(db.Model):
 
     @staticmethod
     def create_section_bid(concert_id, section_id, num_tickets, bid_price_per_ticket):
-        bid_price_total = num_tickets * float(price_per_ticket)
+        bid_price_total = num_tickets * float(bid_price_per_ticket)
 
         new_section_bid = Section_Bid(
                 concert_id=concert_id,
