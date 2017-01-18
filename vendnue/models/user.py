@@ -19,6 +19,7 @@ class User(db.Model):
     last_login = db.Column(db.DateTime, default=datetime.utcnow)
     confirmed = db.Column(db.Boolean, default=False)
     tickets = db.relationship('Ticket', backref='seller', lazy='dynamic')
+    section_bids = db.relationship('Section_Bid', backref='bidder', lazy='dynamic')
 
     ######################## Flask-Login #########################
     def is_authenticated(self):
