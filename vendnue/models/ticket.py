@@ -16,14 +16,23 @@ class Ticket(db.Model):
     # section through backref
 
     @staticmethod
-    def create_ticket(concert_id, section_id, price, seller_id):
-        new_ticket = Ticket(concert_id=concert_id, section_id=section_id, price=price, seller_id=seller_id)
-        db.session.add(new_ticket)
-        db.session.flush()
-        new_ticket.path_to_tickets = '/' + str(new_ticket.id)
-        db.session.add(new_ticket)
+    def create_tickets(concert_id, section_id, price_per_ticket, seller_id, num_tickets=1):
+
+        created_tickets = []
+        for num_ticket in num_tickets:
+            new_ticket = Ticket(concert_id=concert_id, section_id=section_id, price=price_per_ticket, seller_id=seller_id)
+            db.session.add(new_ticket)
+            db.session.flush()
+            new_ticket.path_to_tickets = '/' + str(new_ticket.id)
+            db.session.add(new_ticket)
+            created_ticket_ids.append(new_ticket)
+
         try:
             db.session.commit()
         except IntegrityError:
             return model_responses.error('there was an integrity error')
-        return model_responses.success({'ticket_id':new_ticket.id})
+
+        ret = {
+            'tickets_created': created_tickets
+        }
+        return model_responses.success(ret)
