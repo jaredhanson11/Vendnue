@@ -18,6 +18,7 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     last_login = db.Column(db.DateTime, default=datetime.utcnow)
     confirmed = db.Column(db.Boolean, default=False)
+    tickets = db.relationship('Ticket', backref='seller', lazy='dynamic')
 
     ######################## Flask-Login #########################
     def is_authenticated(self):
@@ -47,16 +48,16 @@ class User(db.Model):
         try:
             db.session.commit()
         except IntegrityError:
-            return model_responses.error('error':'there was an integrity error')
+            return model_responses.error('there was an integrity error')
         return model_responses.success({'user_id':new_user.id})
 
     @staticmethod
     def get_hashed_password(plaintext_password):
-        return bcrypt.hashpw(plaintext_password, bcrypt.gensalt(12))
+        return bcrypt.hashpw(plaintext_password.encode('utf-8'), bcrypt.gensalt(12))
 
     @staticmethod
     def check_password(plaintext_password, hashed_password):
-        return bcrypt.checkpw(plaintext_password, hashed_password)
+        return bcrypt.checkpw(plaintext_password.encode('utf-8'), hashed_password)
 
     @staticmethod
     def get_user_by_email(email):

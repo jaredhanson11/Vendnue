@@ -37,7 +37,9 @@ class Tickets(Resource):
         except ValueError:
             return responses.error('The post values were not correct.', 422)
 
+        seller_id = current_user.id
         created_tickets = ticket.Ticket.create_tickets(
+            seller_id=seller_id,
             concert_id=concert_id,
             section_id=section_id,
             price_per_ticket=price_per_ticket,
@@ -45,7 +47,10 @@ class Tickets(Resource):
         )
 
         if 'error' in created_tickets:
-            return responses.error(created_ticket_ids['error'], 500)
+            return responses.error(created_tickets['error'], 500)
 
-        created_ticket_ids = map(lambda ticket: ticket.id, created_tickets)
-        return responses.success(created_ticket_ids, 201)
+        created_ticket_ids = map(lambda ticket: ticket.id, created_tickets['tickets_created'])
+        data = {
+            'tickets_created': created_ticket_ids
+        }
+        return responses.success(data, 201)
