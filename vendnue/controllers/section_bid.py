@@ -29,6 +29,7 @@ class Section_Bids(Resource):
                 500 - server error in processing section bid creations
         '''
         try:
+            bidder_id = current_user.id
             concert_id = int(request.form['concert_id'])
             section_id = int(request.form['section_id'])
             num_tickets = int(request.form['num_tickets'])
@@ -37,8 +38,8 @@ class Section_Bids(Resource):
             return responses.error('The post keys were not corect.', 400)
         except ValueError:
             return responses.error('The post values were not correct.', 422)
-        print bid_price_per_ticket
-        new_section_bid = section_bid.Section_Bid.create_section_bid(concert_id, section_id, num_tickets, bid_price_per_ticket)
+
+        new_section_bid = section_bid.Section_Bid.create_section_bid(bidder_id, concert_id, section_id, num_tickets, bid_price_per_ticket)
         
         if 'error' in new_section_bid:
             return responses.error(new_section_bid['error'], 500)
@@ -65,9 +66,19 @@ class Section_Bid(Resource):
             500 - server error in processing the querying of section bids
             
         '''
-        section_bids = section_bid.Section_Bids.get_section_bids(section_id)
-        if 'error' in section_bids:
-            return responses.error(section_bids['error'], 500)
+        section_bid_objs = section_bid.Section_Bid.get_section_bids(section_id)
+        if 'error' in section_bid_objs:
+            return responses.error(section_bid_objs['error'], 500)
         else:
-            return responses.success(section_bids, 200)
-
+            section_bids = map(lambda sb :
+                    {
+                        'bidder_id' : sb.bidder_id,
+                        'concert_id' : sb.concert_id,
+                        'bid_price_per_ticket' : sb.bid_price_per_ticket,
+                        'num_tickets' : sb.num_tickets
+                    }, section_bid_objs['section_bids']
+                )
+            data = {
+                    'section_bids': section_bids
+                    }
+            return responses.success(data, 200)

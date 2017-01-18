@@ -17,12 +17,14 @@ class Section_Bid(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     # concert through backref
     # section through backref
+    # bidder through backref
 
     @staticmethod
-    def create_section_bid(concert_id, section_id, num_tickets, bid_price_per_ticket):
+    def create_section_bid(bidder_id, concert_id, section_id, num_tickets, bid_price_per_ticket):
         bid_price_total = num_tickets * float(bid_price_per_ticket)
 
         new_section_bid = Section_Bid(
+                bidder_id=bidder_id,
                 concert_id=concert_id,
                 section_id=section_id,
                 bid_price_per_ticket=bid_price_per_ticket,
@@ -37,11 +39,11 @@ class Section_Bid(db.Model):
             return model_responses.error('Integrity error')
 
         ret = {'section_bid_id': new_section_bid.id}
-        return model_reponses.success(ret)
+        return model_responses.success(ret)
 
     @staticmethod
     def get_section_bids(section_id):
-        section_bids = Section_Bid.query.filter_by(Section_Bid.section_id == section_id)
+        section_bids = Section_Bid.query.filter(Section_Bid.section_id == section_id).all()
         if section_bids:
             ret = {'section_bids' : section_bids}
             return model_responses.success(ret)
