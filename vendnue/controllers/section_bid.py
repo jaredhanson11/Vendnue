@@ -4,13 +4,15 @@ from ..models import section_bid
 from ..utils import *
 from flask_login import login_required, current_user
 
+from . import exchange
+
 
 class Section_Bids(Resource):
     '''
     URL Endpoint: `/section_bids/`
     Allowed methods: POST
     '''
-    
+
     decorators = [login_required]
 
     def post(self):
@@ -46,13 +48,11 @@ class Section_Bids(Resource):
             num_tickets=num_tickets,
             bid_price_per_ticket=bid_price_per_ticket
         )
-        
+
         if 'error' in new_section_bid:
             return responses.error(new_section_bid['error'], 500)
         else:
             section_bid_obj = new_section_bid['section_bid']
-            print new_section_bid
-            print type(section_bid_obj)
             new_section_bid = {
                 'bidder_id' : section_bid_obj.bidder_id,
                 'concert_id' : section_bid_obj.concert_id,
@@ -63,6 +63,8 @@ class Section_Bids(Resource):
             data = {
                 'section_bid': new_section_bid
             }
+
+            exchange.section_bid_match(section_bid_obj.section)
 
             return responses.success(data, 200)
 

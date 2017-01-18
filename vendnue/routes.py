@@ -1,5 +1,5 @@
 from . import api
-from controllers import auth, user, concert, ticket, section_bid
+from controllers import auth, user, concert, ticket, section_bid, exchange
 
 def add_resources():
     ### Auth routes ###
@@ -20,3 +20,5 @@ def add_resources():
     ### Section Bid routes ###
     api.add_resource(section_bid.Section_Bids, '/section_bids/')
     api.add_resource(section_bid.Section_Bid, '/section_bids/<int:section_id>')
+
+    api.add_resource(exchange.Exchange, '/exchange')
