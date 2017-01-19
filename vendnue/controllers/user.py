@@ -5,9 +5,24 @@ from ..models import user
 from ..utils import *
 
 class User(Resource):
+    '''
+        URL Endpoint: `/users/<int:user_id>`
+        Allowed methods: GET
+    '''
     decorators = [login_required]
 
     def get(self, user_id):
+        '''
+        GET `/users/<int:user_id>`
+            body:
+                None
+            returns:
+                user data 
+                {'email':str, 'first_name':str, 'last_name':str}
+            errors:
+                403 - permission denied
+        '''
+        
         # You can only get the information for your own profile
         if current_user.id != user_id:
             return responses.error('Permission denied', 403)
