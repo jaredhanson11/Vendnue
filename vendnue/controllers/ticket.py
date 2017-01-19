@@ -5,18 +5,16 @@ from ..utils import *
 
 class Tickets(Resource):
     '''
-    URL Endpoint: `/tickets/`
+    URL Endpoint: `/concerts/<int:concert_id>/sections/<int:section_id>/tickets/`
     Allowed methods: POST
     '''
 
     decorators = [login_required]
 
-    def post(self):
+    def post(self, concert_id, section_id)
         '''
-        POST `/tickets/`
+        POST `/concerts/<int:concert_id>/sections/<int:section_id>/tickets/`
             body:
-                concert_id: int
-                section_id: int
                 price_per_ticket: float
                 num_tickets: int
             returns:
@@ -28,17 +26,17 @@ class Tickets(Resource):
                 500 - unkown model error
         '''
         try:
-            concert_id = int(request.form['concert_id'])
-            section_id = int(request.form['section_id'])
+            concert_id = int(concert_id)
+            section_id = int(section_id)
             price_per_ticket = float(request.form['price_per_ticket'])
             num_tickets = int(request.form['num_tickets'])
         except KeyError:
             return responses.error('The post keys were not correct.', 400)
         except ValueError:
             return responses.error('The post values were not correct.', 422)
-
+        
         seller_id = current_user.id
-        created_tickets = ticket.Ticket.create_tickets(
+        created_tickets = ticket.Ticket.create_tickets(  
             seller_id=seller_id,
             concert_id=concert_id,
             section_id=section_id,
