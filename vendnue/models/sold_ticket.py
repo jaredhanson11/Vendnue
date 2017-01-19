@@ -1,4 +1,4 @@
-ufrom sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError
 
 from . import db
 from ..utils import *
@@ -14,6 +14,9 @@ class Sold_Ticket(db.Model):
     price = db.Column(db.Float)
     path_to_tickets = db.Column(db.String(180))
     seller_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    listed_at = db.Column(db.DateTime)
     # seller through users backref
     # concert through backref
     # section through backref
+
+    cleared_section_bid_id = db.Column(db.Integer, db.ForeignKey('cleared_section_bids.id'))

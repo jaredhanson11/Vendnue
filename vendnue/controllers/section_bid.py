@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from flask import request
-from ..models import section_bid
+from ..models import section_bid, exchange
 from ..utils import *
 from flask_login import login_required, current_user
 
