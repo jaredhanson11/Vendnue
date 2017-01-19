@@ -11,7 +11,7 @@ class Tickets(Resource):
 
     decorators = [login_required]
 
-    def post(self, concert_id, section_id)
+    def post(self, concert_id, section_id):
         '''
         POST `/concerts/<int:concert_id>/sections/<int:section_id>/tickets/`
             body:
