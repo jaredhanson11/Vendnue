@@ -2,11 +2,11 @@ import requests
 Session = requests.Session
 url = 'http://127.0.0.1:5000'
 
-def login(email='jred0011@gmail.com', password='password'):
+def login(email, password='password'):
     session = Session()
     data = {
-        'email': 'jred0011@gmail.com',
-        'password': 'password'
+        'email': email,
+        'password': password
     }
     response = session.post(url + '/auth/login', data=data)
     print response.json()
