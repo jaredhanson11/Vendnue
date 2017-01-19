@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy.exc import IntegrityError
 
 from . import db
@@ -20,3 +21,4 @@ class Sold_Ticket(db.Model):
     # section through backref
 
     cleared_section_bid_id = db.Column(db.Integer, db.ForeignKey('cleared_section_bids.id'))
+    sold_at = db.Column(db.DateTime, default=datetime.utcnow)

@@ -24,5 +24,5 @@ class Cleared_Section_Bid(db.Model):
     # bidder through backref
     ########################
 
-    sold_tickets = db.relationship('Sold_Ticket', backref='cleared_section_bid', lazy='dynamic')
+    purchased_tickets = db.relationship('Sold_Ticket', backref='cleared_section_bid', lazy='dynamic')
     cleared_at = db.Column(db.DateTime, default=datetime.utcnow)

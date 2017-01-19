@@ -4,8 +4,6 @@ from ..models import section_bid, exchange
 from ..utils import *
 from flask_login import login_required, current_user
 
-from ..models import exchange
-
 class Section_Bids(Resource):
     '''
     URL Endpoint: `/concerts/<int:concert_id>/sections/<int:section_id>/section_bids/`
