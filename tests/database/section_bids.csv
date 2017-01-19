@@ -1,0 +1,4 @@
+id,bidder_id,concert_id,section_id,num_tickets,bid_price_per_ticket,bid_price_total,created_at
+1,3,1,1,3,33.3,100,2017-01-19 8:38:14
+2,1,2,2,3,70,210,2017-01-19 8:38:14
+3,2,3,3,3,16.67,50,2017-01-19 8:38:14
