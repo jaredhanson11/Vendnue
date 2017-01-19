@@ -17,6 +17,7 @@ class Concert(db.Model):
     map = db.relationship('Map', backref='concert', uselist=False)
     artists_performing = db.relationship('Artist', secondary=concerts_to_artists, backref=db.backref('concerts', lazy='dynamic'))
     tickets = db.relationship('Ticket', backref='concert', lazy='dynamic')
+    sold_tickets = db.relationship('Sold_Ticket', backref='concert', lazy='dynamic')
     section_bids = db.relationship('Section_Bid', backref='concert', lazy='dynamic')
 
     @staticmethod
