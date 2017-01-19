@@ -1,4 +1,4 @@
-from sqlalchemy.exc import IntegrityError
+from datetime import datetime
 
 from . import db
 from ..utils import *
@@ -14,6 +14,7 @@ class Ticket(db.Model):
     price = db.Column(db.Float)
     path_to_tickets = db.Column(db.String(180))
     seller_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    listed_at = db.Column(db.DateTime, default=datetime.utcnow)
     # seller through users backref
     # concert through backref
     # section through backref

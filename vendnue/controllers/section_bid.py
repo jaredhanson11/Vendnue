@@ -4,8 +4,7 @@ from ..models import section_bid
 from ..utils import *
 from flask_login import login_required, current_user
 
-from . import exchange
-
+from ..models import exchange
 
 class Section_Bids(Resource):
     '''
