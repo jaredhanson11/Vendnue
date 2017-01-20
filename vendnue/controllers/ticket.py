@@ -6,10 +6,35 @@ from ..utils import *
 class Tickets(Resource):
     '''
     URL Endpoint: `/concerts/<int:concert_id>/sections/<int:section_id>/tickets/`
-    Allowed methods: POST
+    Allowed methods: GET, POST
     '''
 
     decorators = [login_required]
+    
+    def get(self, concert_id, section_id):
+         '''
+        GET `/concerts/<int:concert_id>/sections/<int:section_id>/tickets/`
+            returns:
+                list of tickets for the concert and section
+                {'tickets': [ <ticket json> ]}
+            errors:
+                422 - invalid post body values
+                500 - unkown model error
+        '''
+    try:
+        concert_id = int(concert_id)
+        section_id = int(section_id)
+    except ValueError:
+        return responses.error('The post value were not correct.', 422)
+
+    ticket_resp = ticket.get_tickets_by_section_id(section_id)
+    if 'error' in ticket_resp:
+        return responses.error(ticket_resp['error'], 404)
+    else:
+        data = {
+            'tickets' : ticket_resp['tickets']
+        }
+        return responses.success(data, 200)
 
     def post(self, concert_id, section_id):
         '''
