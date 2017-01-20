@@ -17,20 +17,15 @@ class User(Resource):
             body:
                 None
             returns:
-                user data 
+                user data
                 {'email':str, 'first_name':str, 'last_name':str}
             errors:
                 403 - permission denied
         '''
-        
+
         # You can only get the information for your own profile
         if current_user.id != user_id:
             return responses.error('Permission denied', 403)
 
-        user_data = {
-                'email': current_user.email,
-                'first_name': current_user.first_name,
-                'last_name': current_user.last_name
-            }
-
-        return responses.success(user_data, 200)
+        data = current_user.get_json()
+        return responses.success(data, 200)
