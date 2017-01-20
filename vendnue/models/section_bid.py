@@ -21,6 +21,25 @@ class Section_Bid(db.Model):
     # section through backref
     # bidder through backref
 
+    def get_json(self, verbose=True):
+        ret = {
+            'id' : self.id,
+            'num_tickets' : self.num_tickets,
+            'bid_price_per_ticket' : self.bid_price_per_ticket,
+            'bid_price_total' : self.bid_price_total
+        }
+        if verbose:
+            ret.update({
+                'created_at' : self.created_at,
+                'concert' : self.concert.get_json(verbose=False),
+                'section' : self.section.get_json(verbose=False),
+                'bidder' : self.bidder.get_json(verbose=False),
+            })
+        return ret
+
+
+
+
     @staticmethod
     def create_section_bid(bidder_id, concert_id, section_id, num_tickets, bid_price_per_ticket):
         bid_price_total = num_tickets * float(bid_price_per_ticket)

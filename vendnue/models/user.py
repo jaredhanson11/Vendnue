@@ -39,6 +39,23 @@ class User(db.Model):
 
     ####################### End Flask-Login ######################
 
+    def get_json(self, verbose=False):
+        ret = {
+            'id' : self.id,
+            'email' : self.email,
+            'first_name' : self.first_name,
+            'last_name' : self.last_name
+        }
+        if verbose:
+            ret.update({
+                'created_at' : self.created_at,
+                'last_login' : self.last_login,
+                'confirmed' : self.confirmed,
+                'tickets' : map(lambda ticket : ticket.get_json(verbose=False), self.tickets),
+                'sold_tickets' : map(lambda sold_ticket : sold_ticket.get_json(verbose=False), self.sold_tickets),
+                'section_bids' : map(lambda section_bid : section_bid.get_json(verbose=False), self.section_bids)
+            })
+        return ret
 
     @staticmethod
     def create_user(first_name, last_name, email, plaintext_password):

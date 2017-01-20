@@ -14,6 +14,20 @@ class Venue(db.Model):
     city = db.Column(db.String(75))
     state = db.Column(db.String(75))
     concerts = db.relationship('Concert', backref='venue', lazy='dynamic')
+    
+    def get_json(self, verbose=False):
+        ret = {
+            'id' : self.id,
+            'name' : self.name,
+            'description' : self.description,
+        }
+        if verbose:
+            ret.update({
+                'city' : self.city,
+                'state' : self.state,
+                'concerts' : map(lambda concert : concert.get_json(verbose=False), self.concerts)
+            })
+        return ret
 
     @staticmethod
     def create_venue(name, description, city, state):
