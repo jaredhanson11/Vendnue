@@ -19,7 +19,10 @@ class Concerts(Resource):
             errors:
                 pass
         '''
-        concert_objs = concert.Concert.get_concerts_desc().all()
+        concerts_query = concert.Concert.get_concerts_desc()
+        if 'error' in concerts_query:
+            return responses.error('There was an error getting concerts', 500)
+        concert_objs = concerts_query['concerts']
         concerts_list_json = map(lambda concert_obj: concert_obj.get_json(), concert_objs)
 
         ret = {'concerts': concerts_list_json}

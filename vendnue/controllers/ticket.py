@@ -73,7 +73,7 @@ class Tickets(Resource):
 
         if 'error' in created_tickets:
             return responses.error(created_tickets['error'], 500)
-        created_ticket_objs = created_tickets['tickets_created'])
+        created_ticket_objs = created_tickets['tickets_created']
         created_tickets_json = map(lambda ticket_obj: ticket_obj.get_json(), created_ticket_objs)
         data = {
             'tickets_created': created_ticket_json

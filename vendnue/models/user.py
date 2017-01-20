@@ -63,7 +63,7 @@ class User(db.Model):
 
     @staticmethod
     def update_user(user_id, data):
-        db.session.query(user.User).filter_by(User.id=user_id).update(data)
+        User.query.filter_by(User.id == user_id).update(data)
         try:
             db.session.commit()
         except IntegrityError:

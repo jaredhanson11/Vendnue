@@ -41,7 +41,10 @@ class Concert(db.Model):
 
     @staticmethod
     def get_concerts_desc():
-        return Concert.query.order_by(Concert.date.desc())
+        ret = {
+            'concerts': Concert.query.order_by(Concert.date.desc())
+        }
+        return model_responses.success(ret)
 
 
     def get_json(self, verbose=True):
