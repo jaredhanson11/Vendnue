@@ -9,6 +9,7 @@ def add_resources():
 
     ### User routes ###
     api.add_resource(user.User, '/user/')
+    api.add_resource(user.Users, '/users/')
 
     ### Concert routes ###
     api.add_resource(concert.Concerts, '/concerts/')

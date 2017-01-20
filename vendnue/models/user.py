@@ -91,6 +91,13 @@ class User(db.Model):
         return model_responses.success({'user_id':new_user.id})
 
     @staticmethod
+    def get_users():
+        ret = {
+            'users': User.query.order_by(User.created_at.desc())
+        }
+        return model_responses.success(ret)
+
+    @staticmethod
     def get_hashed_password(plaintext_password):
         return bcrypt.hashpw(plaintext_password.encode('utf-8'), bcrypt.gensalt(12))
 

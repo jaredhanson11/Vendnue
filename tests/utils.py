@@ -39,3 +39,8 @@ def get_section_bids(session, concert_id, section_id):
     response = session.get(url+'/concerts/' + str(concert_id) + '/sections/' + str(section_id) + '/section_bids/')
     print response.json()
     assert(response.status_code == 200)
+
+def get_all_users(session):
+    response = session.get(url+'/users/')
+    print response.json()
+    assert(response.status_code == 200)

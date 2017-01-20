@@ -51,4 +51,28 @@ class User(Resource):
         }
         return responses.success(data, 200)
 
-# users
+class Users(Resource):
+    '''
+        URL Endpoint: `/user/`
+        Allowed methods: GET
+    '''
+    decorators = [login_required]
+
+    def get(self):
+        '''
+        GET `/users/`
+            body:
+                None
+            returns:
+                user data
+                {'email':str, 'first_name':str, 'last_name':str}
+        '''
+
+        # You can only get the information for your own profile
+        user_query = user.User.get_users()
+        user_objs = user_query['users']
+        user_list_json = map(lambda user_obj: user_obj.get_json(verbose=False), user_objs)
+        ret = {
+            'users' : user_list_json
+        }
+        return responses.success(ret, 200)
