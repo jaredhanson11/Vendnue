@@ -20,10 +20,20 @@ class Artist(db.Model):
         if artist_obj is None:
             return model_responses.error('No artist exists')
         ret = {
-                'artist': artist_obj
-            }
+            'artist': artist_obj
+        }
         return model_responses.success(ret)
 
+
+    @staticmethod
+    def get_all_artists():
+        artist_objs = Artist.query.order_by(Artist.name)
+        if artist_objs is None:
+            return model_responses.error('No artists listed')
+        ret = {
+            'artists': artist_objs
+        }
+        return model_responses.success(ret)
 
     def get_json(self, verbose=True):
         artist_json = {
