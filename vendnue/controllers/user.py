@@ -6,26 +6,49 @@ from ..utils import *
 
 class User(Resource):
     '''
-        URL Endpoint: `/users/<int:user_id>`
+        URL Endpoint: `/user/`
         Allowed methods: GET
     '''
     decorators = [login_required]
 
-    def get(self, user_id):
+    def get(self):
         '''
-        GET `/users/<int:user_id>`
+        GET `/user/`
             body:
                 None
             returns:
                 user data
                 {'email':str, 'first_name':str, 'last_name':str}
-            errors:
-                403 - permission denied
         '''
 
         # You can only get the information for your own profile
-        if current_user.id != user_id:
-            return responses.error('Permission denied', 403)
-
-        data = current_user.get_json()
+        data = {
+            'user' : current_user.get_json()
+        }
         return responses.success(data, 200)
+
+    def put(self):
+        '''
+        PUT `/user/`
+            body:
+                {'first_name':str, 'last_name':str, 'email':str}
+            returns:
+                changed user data
+                {'email':str, 'first_name':str, 'last_name':str}
+            errors:
+                403 - permission denied
+        '''
+        first_name, last_name, email = request.form['first_name'], request.form['last_name'], request.form['email']
+        data = {
+            'first_name' : first_name,
+            'last_name' : last_name,
+            'email' : email
+        }
+        user_id = current_user.id
+        data = user.User.update_user(user_id, data)
+        ret = {
+            'user' : data
+        }
+        return responses.success(data, 200)
+
+# users

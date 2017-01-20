@@ -25,4 +25,7 @@ class Artist(Resource):
             return responses.error(get_artist['error'], 404)
         artist_obj = get_artist['artist']
         data = artist_obj.get_json()
-        return responses.success(data, 200)
+        ret = {
+            'artist' : data
+        }
+        return responses.success(ret, 200)

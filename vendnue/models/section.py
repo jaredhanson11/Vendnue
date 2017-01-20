@@ -20,6 +20,7 @@ class Section(db.Model):
         section_json = {
             'id' : self.id,
             'name' : self.name,
+            'type' : 'section'
         }
         if verbose:
             section_json.update({
@@ -28,10 +29,7 @@ class Section(db.Model):
                 'bids' : map(lambda bid : bid.get_json(verbose=False), self.bids),
                 'map' : self.map.get_json(verbose=False)
             })
-        ret = {
-            'section' : section_json
-        }
-        return ret
+        return section_json
 
     @staticmethod
     def create_section(name, map_id):
