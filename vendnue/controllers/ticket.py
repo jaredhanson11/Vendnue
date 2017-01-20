@@ -12,7 +12,7 @@ class Tickets(Resource):
     decorators = [login_required]
     
     def get(self, concert_id, section_id):
-         '''
+        '''
         GET `/concerts/<int:concert_id>/sections/<int:section_id>/tickets/`
             returns:
                 list of tickets for the concert and section
@@ -21,20 +21,22 @@ class Tickets(Resource):
                 422 - invalid post body values
                 500 - unkown model error
         '''
-    try:
-        concert_id = int(concert_id)
-        section_id = int(section_id)
-    except ValueError:
-        return responses.error('The post value were not correct.', 422)
+        try:
+            concert_id = int(concert_id)
+            section_id = int(section_id)
+        except ValueError:
+            return responses.error('The post value were not correct.', 422)
 
-    ticket_resp = ticket.get_tickets_by_section_id(section_id)
-    if 'error' in ticket_resp:
-        return responses.error(ticket_resp['error'], 404)
-    else:
-        data = {
-            'tickets' : ticket_resp['tickets']
-        }
-        return responses.success(data, 200)
+        ticket_resp = ticket.get_tickets_by_section_id(section_id)
+        if 'error' in ticket_resp:
+            return responses.error(ticket_resp['error'], 404)
+        else:
+            ticket_objs = ticket_resp['tickets']
+            data = map(lambda tick : tick.get_json(verbose=False), ticket_objs)
+            ret = {
+                'tickets' : data
+            }
+            return responses.success(ret, 200)
 
     def post(self, concert_id, section_id):
         '''
