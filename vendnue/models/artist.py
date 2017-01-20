@@ -26,14 +26,17 @@ class Artist(db.Model):
 
 
     def get_json(self, verbose=True):
-        ret = {
-            'artist_id': self.id,
-            'artist_name': self.name
+        artist_json = {
+            'id': self.id,
+            'name': self.name
         }
 
         if verbose:
-            ret.update({
-                'artist_concerts': map(lambda concert_obj: concert_obj.get_json(verbose=False), self.concerts)
+            artist_json.update({
+                'concerts': map(lambda concert_obj: concert_obj.get_json(verbose=False), self.concerts)
             })
+        ret = {
+                'artist': artist_json
+            }
 
         return ret

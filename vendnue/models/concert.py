@@ -36,19 +36,22 @@ class Concert(db.Model):
 
 
     def get_json(self, verbose=True):
-        ret = {
-                'concert_id': self.id,
-                'concert_name': self.name
+        concert_json = {
+                'id': self.id,
+                'name': self.name
             }
 
         if verbose:
-            ret.update({
-                    'concert_venue': self.venue.get_json(verbose=False),
-                    'concert_map': self.map.get_json(),
-                    'concert_artists_performing': map(lambda artist_obj: artist_obj.get_json(verbose=False), self.artists_performing),
-                    'concert_tickets': map(lambda ticket_obj: ticket_obj.get_json(verbose=False), self.tickets),
-                    'concert_sold_tickets': map(lambda sold_ticket_obj: sold_ticket_obj.get_json(verbose=False), self.sold_tickets),
-                    'concert_section_bids': map(lambda section_bid_obj: section_bid_obj.get_json(verbose=False), self.section_bids)
+            concert_json.update({
+                    'venue': self.venue.get_json(verbose=False),
+                    'map': self.map.get_json(),
+                    'artists_performing': map(lambda artist_obj: artist_obj.get_json(verbose=False), self.artists_performing),
+                    'tickets': map(lambda ticket_obj: ticket_obj.get_json(verbose=False), self.tickets),
+                    'sold_tickets': map(lambda sold_ticket_obj: sold_ticket_obj.get_json(verbose=False), self.sold_tickets),
+                    'section_bids': map(lambda section_bid_obj: section_bid_obj.get_json(verbose=False), self.section_bids)
                 })
+        ret = {
+                'concert': concert_json
+            }
 
         return ret

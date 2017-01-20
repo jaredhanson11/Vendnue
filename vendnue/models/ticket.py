@@ -21,6 +21,16 @@ class Ticket(db.Model):
     # section through backref
 
     @staticmethod
+    def get_tickets_by_section_id(section_id):
+        tickets = Ticket.query.filter(Ticket.section_id == section_id).all()
+        if tickets is None:
+            return model_responses.error('This ticket doens\'t exist.')
+        ret = {
+                'tickets': tickets
+            }
+        return model_responses.success(ret)
+
+    @staticmethod
     def create_tickets(concert_id, section_id, price_per_ticket, seller_id, num_tickets=1):
 
         created_tickets = []
@@ -46,25 +56,24 @@ class Ticket(db.Model):
             'tickets_created': created_tickets
         }
         return model_responses.success(ret)
-    
-    @staticmethod
-    def get_tickets_by_section_id(section_id):
-        tickets = Ticket.query.filter(Ticket.section_id == section_id).all()
-        return tickets
 
     def get_json(verbose=True):
-        ret = {
-                'ticket_id': self.id,
-                'ticket_price': self.price
+        ticket_json = {
+                'id': self.id,
+                'price': self.price
             }
 
         if verbose:
-            ret.update({
-                'ticket_path_to_ticket': self.path_to_ticket,
-                'ticket_seller': self.seller.get_json(verbose=False),
-                'ticket_listed_at': self.listed_at,
-                'ticket_concert': self.concert.get_json(verbose=False),
-                'ticket_section': self.section.get_json(verbose=False)
+            ticket_json.update({
+                'path_to_ticket': self.path_to_ticket,
+                'seller': self.seller.get_json(verbose=False),
+                'listed_at': self.listed_at,
+                'concert': self.concert.get_json(verbose=False),
+                'section': self.section.get_json(verbose=False)
             })
+
+        ret = {
+                'ticket': ticket_json
+            }
 
         return ret

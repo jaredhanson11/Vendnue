@@ -26,20 +26,24 @@ class Sold_Ticket(db.Model):
 
 
     def get_json(verbose=True):
-        ret = {
-                'sold_ticket_id': self.id,
-                'sold_ticket_price': self.price
+        sold_ticket_json = {
+                'id': self.id,
+                'price': self.price
             }
 
         if verbose:
-            ret.update({
-                'sold_ticket_path_to_ticket': self.path_to_ticket,
-                'sold_ticket_seller': self.seller.get_json(verbose=False),
-                'sold_ticket_listed_at': self.listed_at,
-                'sold_ticket_concert': self.concert.get_json(verbose=False),
-                'sold_ticket_section': self.section.get_json(verbose=False),
-                'sold_ticket_cleared_section_bid': self.cleared_section_bid.get_json(verbose=False),
-                'sold_ticket_sold_at': self.sold_at
+            sold_ticket_json.update({
+                'path_to_ticket': self.path_to_ticket,
+                'seller': self.seller.get_json(verbose=False),
+                'listed_at': self.listed_at,
+                'concert': self.concert.get_json(verbose=False),
+                'section': self.section.get_json(verbose=False),
+                'cleared_section_bid': self.cleared_section_bid.get_json(verbose=False),
+                'sold_at': self.sold_at
             })
+
+        ret = {
+                'sold_ticket': sold_ticket_json
+            }
 
         return ret

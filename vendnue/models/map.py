@@ -26,14 +26,18 @@ class Map(db.Model):
 
 
     def get_json(self, verbose=True):
-        ret = {
-                'map_id': self.id,
-                'map_path_to_image': self.path_to_map
+        map_json = {
+                'id': self.id,
+                'path_to_map': self.path_to_map
             }
         if verbose:
-            ret.update({
-                'map_sections': map(lambda section_obj: section_obj.get_json(verbose=False), self.sections),
-                'map_concert': self.concert.get_json(verbose=False)
+            map_json.update({
+                'sections': map(lambda section_obj: section_obj.get_json(verbose=False), self.sections),
+                'concert': self.concert.get_json(verbose=False)
             })
+
+        ret = {
+                'map': map_json
+            }
 
         return ret
