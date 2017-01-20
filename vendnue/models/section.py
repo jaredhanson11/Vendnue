@@ -16,7 +16,7 @@ class Section(db.Model):
     map_id = db.Column(db.Integer, db.ForeignKey('maps.id'))
     # map through backref get concert through map object
 
-    def get_json(self, verbose=False):
+    def get_json(self, verbose=True):
         section_json = {
             'id' : self.id,
             'name' : self.name,

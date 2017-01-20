@@ -15,7 +15,7 @@ class Venue(db.Model):
     state = db.Column(db.String(75))
     concerts = db.relationship('Concert', backref='venue', lazy='dynamic')
 
-    def get_json(self, verbose=False):
+    def get_json(self, verbose=True):
         venue_json = {
             'type': 'venue',
             'id' : self.id,
