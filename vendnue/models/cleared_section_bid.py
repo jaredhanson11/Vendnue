@@ -28,14 +28,14 @@ class Cleared_Section_Bid(db.Model):
     cleared_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def get_json(self, verbose=True):
-        ret = {
+        cleared_section_bid_json = {
             'id' : self.id,
             'num_tickets' : self.num_tickets,
             'bid_price_per_ticket' : self.bid_price_per_ticket,
             'bid_price_total' : self.bid_price_total
         }
         if verbose:
-            ret.update({
+            cleared_section_bid_json.update({
                 'created_at' : self.created_at,
                 'cleared_at' : self.cleared_at,
                 'concert' : self.concert.get_json(verbose=False),
@@ -43,6 +43,9 @@ class Cleared_Section_Bid(db.Model):
                 'bidder' : self.bidder.get_json(verbose=False),
                 'purchased_tickets' : map(lambda ticket : ticket.get_json(verbose=False), self.purchased_tickets)
             })
+        ret = {
+            'cleared_section_bid' : cleared_section_bid_json
+        }
         return ret
 
 
