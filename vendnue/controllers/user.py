@@ -38,27 +38,17 @@ class User(Resource):
             errors:
                 403 - permission denied
         '''
-        try:
-            first_name = request.form['first_name']
-            last_name = request.form['last_name']
-            email = request.form['email']
-        except KeyError:
-            return responses.error('The key values are incorrect.')
-
+        first_name, last_name, email = request.form['first_name'], request.form['last_name'], request.form['email']
         data = {
             'first_name' : first_name,
             'last_name' : last_name,
             'email' : email
         }
         user_id = current_user.id
-        updated_user_query = user.User.update_user(user_id, data)
-
-        if 'error' in updated_user_query:
-            return responses.error('There was an error updating profile.', 400)
-
+        data = user.User.update_user(user_id, data)
         ret = {
-            'user' : current_user.get_json()
+            'user' : data
         }
-        return responses.success(ret, 200)
+        return responses.success(data, 200)
 
 # users
