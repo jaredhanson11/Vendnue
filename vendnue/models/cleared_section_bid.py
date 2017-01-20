@@ -29,6 +29,7 @@ class Cleared_Section_Bid(db.Model):
 
     def get_json(self, verbose=True):
         cleared_section_bid_json = {
+            'type': 'cleared_section_bid',
             'id' : self.id,
             'num_tickets' : self.num_tickets,
             'bid_price_per_ticket' : self.bid_price_per_ticket,
@@ -43,9 +44,7 @@ class Cleared_Section_Bid(db.Model):
                 'bidder' : self.bidder.get_json(verbose=False),
                 'purchased_tickets' : map(lambda ticket : ticket.get_json(verbose=False), self.purchased_tickets)
             })
-        ret = {
-            'cleared_section_bid' : cleared_section_bid_json
-        }
+        ret = cleared_section_bid_json
         return ret
 
 

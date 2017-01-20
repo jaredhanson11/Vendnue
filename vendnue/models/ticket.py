@@ -59,6 +59,7 @@ class Ticket(db.Model):
 
     def get_json(verbose=True):
         ticket_json = {
+                'type': 'ticket',
                 'id': self.id,
                 'price': self.price
             }
@@ -72,8 +73,6 @@ class Ticket(db.Model):
                 'section': self.section.get_json(verbose=False)
             })
 
-        ret = {
-                'ticket': ticket_json
-            }
+        ret =  ticket_json
 
         return ret

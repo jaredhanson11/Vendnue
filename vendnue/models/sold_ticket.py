@@ -27,6 +27,7 @@ class Sold_Ticket(db.Model):
 
     def get_json(verbose=True):
         sold_ticket_json = {
+                'type': 'sold_ticket',
                 'id': self.id,
                 'price': self.price
             }
@@ -42,8 +43,6 @@ class Sold_Ticket(db.Model):
                 'sold_at': self.sold_at
             })
 
-        ret = {
-                'sold_ticket': sold_ticket_json
-            }
+        ret = sold_ticket_json
 
         return ret

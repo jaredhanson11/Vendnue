@@ -14,12 +14,13 @@ class Venue(db.Model):
     city = db.Column(db.String(75))
     state = db.Column(db.String(75))
     concerts = db.relationship('Concert', backref='venue', lazy='dynamic')
-    
+
     def get_json(self, verbose=False):
         venue_json = {
+            'type': 'venue',
             'id' : self.id,
             'name' : self.name,
-            'description' : self.description,
+            'description' : self.description
         }
         if verbose:
             venue_json.update({
@@ -27,9 +28,8 @@ class Venue(db.Model):
                 'state' : self.state,
                 'concerts' : map(lambda concert : concert.get_json(verbose=False), self.concerts)
             })
-        ret = {
-            'venue' : venue_json
-        }
+
+        ret = venue_json
         return ret
 
     @staticmethod

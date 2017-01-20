@@ -24,8 +24,10 @@ class Signup(Resource):
                 if new_user == None:
                     return responses.error('There was a server error.', 500)
                 else:
-                    data = {'user_id': new_user.id, 'email': new_user.email}
-                    return responses.success(data, 201)
+                    ret = {
+                        'user': new_user.get_json()
+                    }
+                    return responses.success(ret, 201)
 
 
 class Login(Resource):
@@ -42,8 +44,11 @@ class Login(Resource):
                 user_id = user_exists.id
                 user_exists.set_last_login()
                 login_user(user_exists)
-                data = {'user_id':user_id, 'email':email}
-                return responses.success(data,200)
+
+                ret = {
+                    'user': user_exists.get_json()
+                }
+                return responses.success(ret,200)
             else:
                 return responses.error('The email and password do not match.', 422)
         else:
@@ -54,5 +59,5 @@ class Logout(Resource):
     decorators = [login_required]
     def get(self):
         logout_user()
-        data = {'message': 'Successfully logged out.'}
-        return responses.success(data, 200)
+        ret = {'message': 'Successfully logged out.'}
+        return responses.success(ret, 200)

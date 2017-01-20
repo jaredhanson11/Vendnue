@@ -27,6 +27,7 @@ class Map(db.Model):
 
     def get_json(self, verbose=True):
         map_json = {
+                'type': 'map',
                 'id': self.id,
                 'path_to_map': self.path_to_map
             }
@@ -36,8 +37,6 @@ class Map(db.Model):
                 'concert': self.concert.get_json(verbose=False)
             })
 
-        ret = {
-                'map': map_json
-            }
+        ret = map_json
 
         return ret
