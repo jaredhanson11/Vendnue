@@ -33,3 +33,22 @@ class Concert(db.Model):
     @staticmethod
     def get_concerts_desc():
         return Concert.query.order_by(Concert.date.desc())
+
+
+    def get_json(self, verbose=True):
+        ret = {
+                'concert_id': self.id,
+                'concert_name': self.name
+            }
+
+        if verbose:
+            ret.update({
+                    'concert_venue': self.venue.get_json(verbose=False),
+                    'concert_map': self.map.get_json(),
+                    'concert_artists_performing': map(lambda artist_obj: artist_obj.get_json(verbose=False), self.artists_performing),
+                    'concert_tickets': map(lambda ticket_obj: ticket_obj.get_json(verbose=False), self.tickets),
+                    'concert_sold_tickets': map(lambda sold_ticket_obj: sold_ticket_obj.get_json(verbose=False), self.sold_tickets),
+                    'concert_section_bids': map(lambda section_bid_obj: section_bid_obj.get_json(verbose=False), self.section_bids)
+                })
+
+        return ret

@@ -13,7 +13,7 @@ class Ticket(db.Model):
     concert_id = db.Column(db.Integer, db.ForeignKey('concerts.id'))
     section_id = db.Column(db.Integer, db.ForeignKey('sections.id'))
     price = db.Column(db.Float)
-    path_to_tickets = db.Column(db.String(180))
+    path_to_ticket = db.Column(db.String(180))
     seller_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     listed_at = db.Column(db.DateTime, default=datetime.utcnow)
     # seller through users backref
@@ -33,7 +33,7 @@ class Ticket(db.Model):
                 )
             db.session.add(new_ticket)
             db.session.flush()
-            new_ticket.path_to_tickets = '/' + str(new_ticket.id)
+            new_ticket.path_to_ticket = '/' + str(new_ticket.id)
             db.session.add(new_ticket)
             created_tickets.append(new_ticket)
 
@@ -46,3 +46,20 @@ class Ticket(db.Model):
             'tickets_created': created_tickets
         }
         return model_responses.success(ret)
+
+    def get_json(verbose=True):
+        ret = {
+                'ticket_id': self.id,
+                'ticket_price': self.price
+            }
+
+        if verbose:
+            ret.update({
+                'ticket_path_to_ticket': self.path_to_ticket,
+                'ticket_seller': self.seller.get_json(verbose=False),
+                'ticket_listed_at': self.listed_at,
+                'ticket_concert': self.concert.get_json(verbose=False),
+                'ticket_section': self.section.get_json(verbose=False)
+            })
+
+        return ret

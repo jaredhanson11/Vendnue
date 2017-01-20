@@ -23,3 +23,17 @@ class Map(db.Model):
         except:
             return model_responses.error('there was an integrity error')
         return model_responses.success({'map_id':new_map.id})
+
+
+    def get_json(self, verbose=True):
+        ret = {
+                'map_id': self.id,
+                'map_path_to_image': self.path_to_map
+            }
+        if verbose:
+            ret.update({
+                'map_sections': map(lambda section_obj: section_obj.get_json(verbose=False), self.sections),
+                'map_concert': self.concert.get_json(verbose=False)
+            })
+
+        return ret
