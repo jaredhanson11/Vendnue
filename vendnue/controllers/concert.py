@@ -19,24 +19,31 @@ class Concerts(Resource):
             errors:
                 pass
         '''
-        concert_objs = concert.Concert.get_concerts_desc().all()
-        concerts = map(lambda obj:
-                {
-                    'concert_id': obj.id,
-                    'concert_name': obj.name,
-                    'concert_venue': obj.venue.name,
-                    'concert_date': obj.date.strftime('%Y-%m-%dT%H:%M:%S')
-                }, concert_objs
-                )
+        concerts_query = concert.Concert.get_concerts_desc()
+        if 'error' in concerts_query:
+            return responses.error('There was an error getting concerts', 500)
+        concert_objs = concerts_query['concerts']
+        concerts_list_json = map(lambda concert_obj: concert_obj.get_json(), concert_objs)
 
-
-        data = {'concerts': concerts}
-        return responses.success(data, 200)
-
+        ret = {'concerts': concerts_list_json}
+        return responses.success(ret, 200)
 
 
 class Concert(Resource):
+    '''
+    GET `/concerts/<int:concert_id>
+        params:
+            None
+        returns:
+            User json object
+        errors:
+            pass
+    '''
     def get(self, concert_id):
-        concert_obj = concert.Concert.query.get(concert_id)
-        if concert_obj == None:
+        concert_get = concert.Concert.get_concert_by_id(concert_id)
+        if 'error' in concert_get:
             return responses.error('The concert you\'re searching for does not exist', 404)
+        concert_obj = concert_get['concert']
+
+        ret = {'concert':  concert_obj.get_json()}
+        return responses.success(ret, 200)

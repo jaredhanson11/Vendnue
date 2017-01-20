@@ -16,6 +16,21 @@ class Section(db.Model):
     map_id = db.Column(db.Integer, db.ForeignKey('maps.id'))
     # map through backref get concert through map object
 
+    def get_json(self, verbose=True):
+        section_json = {
+            'id' : self.id,
+            'name' : self.name,
+            'type' : 'section'
+        }
+        if verbose:
+            section_json.update({
+                'tickets' :  map(lambda ticket : ticket.get_json(verbose=False), self.tickets),
+                'sold_tickets' : map(lambda sold_ticket : sold_ticket.get_json(verbose=False), self.sold_tickets),
+                'bids' : map(lambda bid : bid.get_json(verbose=False), self.bids),
+                'map' : self.map.get_json(verbose=False)
+            })
+        return section_json
+
     @staticmethod
     def create_section(name, map_id):
         new_section = Section(name=name, map_id=map_id)

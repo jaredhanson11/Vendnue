@@ -31,5 +31,39 @@ class Concert(db.Model):
         return model_responses({'concert_id':new_concert.id})
 
     @staticmethod
+    def get_concert_by_id(concert_id):
+        concert_obj = Concert.query.get(concert_id)
+        if concert_obj is None:
+            return model_responses.error('Concert does not exist')
+        ret = {'concert': concert_obj}
+        return model_responses.success(ret)
+
+
+    @staticmethod
     def get_concerts_desc():
-        return Concert.query.order_by(Concert.date.desc())
+        ret = {
+            'concerts': Concert.query.order_by(Concert.date.desc())
+        }
+        return model_responses.success(ret)
+
+
+    def get_json(self, verbose=True):
+        concert_json = {
+                'type': 'concert',
+                'id': self.id,
+                'name': self.name,
+                'date': self.date.isoformat()
+            }
+
+        if verbose:
+            concert_json.update({
+                    'venue': self.venue.get_json(verbose=False),
+                    'map': self.map.get_json(verbose=False)),
+                    'artists_performing': map(lambda artist_obj: artist_obj.get_json(verbose=False), self.artists_performing),
+                    'sold_tickets': map(lambda sold_ticket_obj: sold_ticket_obj.get_json(verbose=False), self.sold_tickets),
+                    'tickets': map(lambda ticket_obj: ticket_obj.get_json(verbose=False), self.tickets),
+                    'section_bids': map(lambda section_bid_obj: section_bid_obj.get_json(verbose=False), self.section_bids)
+                })
+        ret = concert_json
+
+        return ret

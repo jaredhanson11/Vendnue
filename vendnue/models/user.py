@@ -39,6 +39,41 @@ class User(db.Model):
 
     ####################### End Flask-Login ######################
 
+    def get_json(self, verbose=True):
+
+        user_json = {
+            'id' : self.id,
+            'email' : self.email,
+            'first_name' : self.first_name,
+            'last_name' : self.last_name,
+            'type' : 'user'
+        }
+
+        if verbose:
+            user_json.update({
+                'created_at' : self.created_at.isoformat(),
+                'last_login' : self.last_login.isoformat(),
+                'confirmed' : self.confirmed,
+                'tickets' : map(lambda ticket : ticket.get_json(verbose=False), self.tickets),
+                'sold_tickets' : map(lambda sold_ticket : sold_ticket.get_json(verbose=False), self.sold_tickets),
+                'section_bids' : map(lambda section_bid : section_bid.get_json(verbose=False), self.section_bids)
+            })
+
+        return user_json
+
+    @staticmethod
+    def update_user(user_id, data):
+        updated_user_id = User.query.filter(User.id == user_id).update(data)
+        try:
+            db.session.commit()
+        except IntegrityError:
+            return model_responses.error('there was an integrity error')
+        # here we return the id of the updated user
+        # on the controller user.py we report an error o.w. return the current user object
+        ret = {
+            'user_id': updated_user_id
+        }
+        return model_responses.success(ret)
 
     @staticmethod
     def create_user(first_name, last_name, email, plaintext_password):

@@ -13,7 +13,7 @@ class Sold_Ticket(db.Model):
     concert_id = db.Column(db.Integer, db.ForeignKey('concerts.id'))
     section_id = db.Column(db.Integer, db.ForeignKey('sections.id'))
     price = db.Column(db.Float)
-    path_to_tickets = db.Column(db.String(180))
+    path_to_ticket = db.Column(db.String(180))
     seller_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     listed_at = db.Column(db.DateTime)
     # seller through users backref
@@ -21,4 +21,28 @@ class Sold_Ticket(db.Model):
     # section through backref
 
     cleared_section_bid_id = db.Column(db.Integer, db.ForeignKey('cleared_section_bids.id'))
+    # cleared_section_bid through backref
     sold_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+    def get_json(self, verbose=True):
+        sold_ticket_json = {
+                'type': 'sold_ticket',
+                'id': self.id,
+                'price': self.price
+            }
+
+        if verbose:
+            sold_ticket_json.update({
+                'path_to_ticket': self.path_to_ticket,
+                'seller': self.seller.get_json(verbose=False),
+                'concert': self.concert.get_json(verbose=False),
+                'section': self.section.get_json(verbose=False),
+                'cleared_section_bid': self.cleared_section_bid.get_json(verbose=False),
+                'listed_at': self.listed_at.isoformat(),
+                'sold_at': self.sold_at.isoformat()
+            })
+
+        ret = sold_ticket_json
+
+        return ret
