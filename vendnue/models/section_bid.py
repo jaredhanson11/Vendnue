@@ -22,19 +22,22 @@ class Section_Bid(db.Model):
     # bidder through backref
 
     def get_json(self, verbose=True):
-        ret = {
+        section_bid_json = {
             'id' : self.id,
             'num_tickets' : self.num_tickets,
             'bid_price_per_ticket' : self.bid_price_per_ticket,
             'bid_price_total' : self.bid_price_total
         }
         if verbose:
-            ret.update({
+            section_bid_json.update({
                 'created_at' : self.created_at,
                 'concert' : self.concert.get_json(verbose=False),
                 'section' : self.section.get_json(verbose=False),
                 'bidder' : self.bidder.get_json(verbose=False),
             })
+        ret = {
+            'section_bid' : section_bid_json
+        }
         return ret
 
 

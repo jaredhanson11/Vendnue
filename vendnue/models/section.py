@@ -17,17 +17,20 @@ class Section(db.Model):
     # map through backref get concert through map object
 
     def get_json(self, verbose=False):
-        ret = {
+        section_json = {
             'id' : self.id,
             'name' : self.name,
         }
         if verbose:
-            ret.update({
+            section_json.update({
                 'tickets' :  map(lambda ticket : ticket.get_json(verbose=False), self.tickets),
                 'sold_tickets' : map(lambda sold_ticket : sold_ticket.get_json(verbose=False), self.sold_tickets),
                 'bids' : map(lambda bid : bid.get_json(verbose=False), self.bids),
                 'map' : self.map.get_json(verbose=False)
             })
+        ret = {
+            'section' : section_json
+        }
         return ret
 
     @staticmethod

@@ -46,6 +46,11 @@ class Ticket(db.Model):
             'tickets_created': created_tickets
         }
         return model_responses.success(ret)
+    
+    @staticmethod
+    def get_tickets_by_section_id(section_id):
+        tickets = Ticket.query.filter(Ticket.section_id == section_id).all()
+        return tickets
 
     def get_json(verbose=True):
         ret = {
