@@ -51,7 +51,8 @@ class Concert(db.Model):
         concert_json = {
                 'type': 'concert',
                 'id': self.id,
-                'name': self.name
+                'name': self.name,
+                'date': self.date.isoformat()
             }
 
         if verbose:

@@ -45,10 +45,14 @@ class User(Resource):
             'email' : email
         }
         user_id = current_user.id
-        data = user.User.update_user(user_id, data)
+        updated_user_query = user.User.update_user(user_id, data)
+
+        if 'error' in updated_user_query:
+            return responses.error('There was an error updating profile.', 400)
+
         ret = {
-            'user' : data
+            'user' : current_user.get_json()
         }
-        return responses.success(data, 200)
+        return responses.success(ret, 200)
 
 # users

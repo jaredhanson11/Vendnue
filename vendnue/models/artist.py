@@ -18,7 +18,7 @@ class Artist(db.Model):
     def get_by_id(artist_id):
         artist_obj = Artist.query.get(artist_id)
         if artist_obj is None:
-            return model_reponses.error('No artist exists')
+            return model_responses.error('No artist exists')
         ret = {
                 'artist': artist_obj
             }
@@ -36,5 +36,5 @@ class Artist(db.Model):
             artist_json.update({
                 'concerts': map(lambda concert_obj: concert_obj.get_json(verbose=False), self.concerts)
             })
-        
+
         return artist_json

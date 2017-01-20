@@ -8,7 +8,7 @@ def add_resources():
     api.add_resource(auth.Logout, '/auth/logout')
 
     ### User routes ###
-    api.add_resource(user.User, '/users/<int:user_id>')
+    api.add_resource(user.User, '/user/')
 
     ### Concert routes ###
     api.add_resource(concert.Concerts, '/concerts/')

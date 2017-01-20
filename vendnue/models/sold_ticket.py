@@ -25,7 +25,7 @@ class Sold_Ticket(db.Model):
     sold_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
-    def get_json(verbose=True):
+    def get_json(self, verbose=True):
         sold_ticket_json = {
                 'type': 'sold_ticket',
                 'id': self.id,
@@ -36,11 +36,11 @@ class Sold_Ticket(db.Model):
             sold_ticket_json.update({
                 'path_to_ticket': self.path_to_ticket,
                 'seller': self.seller.get_json(verbose=False),
-                'listed_at': self.listed_at,
                 'concert': self.concert.get_json(verbose=False),
                 'section': self.section.get_json(verbose=False),
                 'cleared_section_bid': self.cleared_section_bid.get_json(verbose=False),
-                'sold_at': self.sold_at
+                'listed_at': self.listed_at.isoformat(),
+                'sold_at': self.sold_at.isoformat()
             })
 
         ret = sold_ticket_json

@@ -39,7 +39,7 @@ class User(db.Model):
 
     ####################### End Flask-Login ######################
 
-    def get_json(self, verbose=False):
+    def get_json(self, verbose=True):
 
         user_json = {
             'id' : self.id,
@@ -51,8 +51,8 @@ class User(db.Model):
 
         if verbose:
             user_json.update({
-                'created_at' : self.created_at,
-                'last_login' : self.last_login,
+                'created_at' : self.created_at.isoformat(),
+                'last_login' : self.last_login.isoformat(),
                 'confirmed' : self.confirmed,
                 'tickets' : map(lambda ticket : ticket.get_json(verbose=False), self.tickets),
                 'sold_tickets' : map(lambda sold_ticket : sold_ticket.get_json(verbose=False), self.sold_tickets),
@@ -63,12 +63,15 @@ class User(db.Model):
 
     @staticmethod
     def update_user(user_id, data):
-        User.query.filter_by(User.id == user_id).update(data)
+        updated_user_id = User.query.filter(User.id == user_id).update(data)
         try:
             db.session.commit()
         except IntegrityError:
             return model_responses.error('there was an integrity error')
-        return model_responses.success(data)
+        ret = {
+            'user_id': updated_user_id
+        }
+        return model_responses.success(ret)
 
     @staticmethod
     def create_user(first_name, last_name, email, plaintext_password):

@@ -27,7 +27,7 @@ class Tickets(Resource):
         except ValueError:
             return responses.error('The post value were not correct.', 422)
 
-        ticket_resp = ticket.get_tickets_by_section_id(section_id)
+        ticket_resp = ticket.Ticket.get_tickets_by_section_id(section_id)
         if 'error' in ticket_resp:
             return responses.error(ticket_resp['error'], 404)
         else:
@@ -76,6 +76,6 @@ class Tickets(Resource):
         created_ticket_objs = created_tickets['tickets_created']
         created_tickets_json = map(lambda ticket_obj: ticket_obj.get_json(), created_ticket_objs)
         data = {
-            'tickets_created': created_ticket_json
+            'tickets_created': created_tickets_json
         }
         return responses.success(data, 201)

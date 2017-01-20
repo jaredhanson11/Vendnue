@@ -41,7 +41,7 @@ class Concert(Resource):
     '''
     def get(self, concert_id):
         concert_get = concert.Concert.get_concert_by_id(concert_id)
-        if 'error' in concert_get['concert']:
+        if 'error' in concert_get:
             return responses.error('The concert you\'re searching for does not exist', 404)
         concert_obj = concert_get['concert']
 

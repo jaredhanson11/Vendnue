@@ -57,7 +57,7 @@ class Ticket(db.Model):
         }
         return model_responses.success(ret)
 
-    def get_json(verbose=True):
+    def get_json(self, verbose=True):
         ticket_json = {
                 'type': 'ticket',
                 'id': self.id,
@@ -68,8 +68,8 @@ class Ticket(db.Model):
             ticket_json.update({
                 'path_to_ticket': self.path_to_ticket,
                 'seller': self.seller.get_json(verbose=False),
-                'listed_at': self.listed_at,
                 'concert': self.concert.get_json(verbose=False),
+                'listed_at': self.listed_at.isoformat(),
                 'section': self.section.get_json(verbose=False)
             })
 
