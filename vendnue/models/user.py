@@ -68,6 +68,8 @@ class User(db.Model):
             db.session.commit()
         except IntegrityError:
             return model_responses.error('there was an integrity error')
+        # here we return the id of the updated user
+        # on the controller user.py we report an error o.w. return the current user object
         ret = {
             'user_id': updated_user_id
         }

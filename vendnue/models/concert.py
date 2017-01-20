@@ -58,7 +58,7 @@ class Concert(db.Model):
         if verbose:
             concert_json.update({
                     'venue': self.venue.get_json(verbose=False),
-                    'map': self.map.get_json(),
+                    'map': self.map.get_json(verbose=False)),
                     'artists_performing': map(lambda artist_obj: artist_obj.get_json(verbose=False), self.artists_performing),
                     'sold_tickets': map(lambda sold_ticket_obj: sold_ticket_obj.get_json(verbose=False), self.sold_tickets),
                     'tickets': map(lambda ticket_obj: ticket_obj.get_json(verbose=False), self.tickets),

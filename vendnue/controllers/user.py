@@ -38,7 +38,13 @@ class User(Resource):
             errors:
                 403 - permission denied
         '''
-        first_name, last_name, email = request.form['first_name'], request.form['last_name'], request.form['email']
+        try:
+            first_name = request.form['first_name']
+            last_name = request.form['last_name']
+            email = request.form['email']
+        except KeyError:
+            return responses.error('The key values are incorrect.')
+
         data = {
             'first_name' : first_name,
             'last_name' : last_name,

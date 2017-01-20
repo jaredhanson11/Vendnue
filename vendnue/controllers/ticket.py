@@ -32,7 +32,7 @@ class Tickets(Resource):
             return responses.error(ticket_resp['error'], 404)
         else:
             ticket_objs = ticket_resp['tickets']
-            tickets_list_json = map(lambda tick : tick.get_json(verbose=False), ticket_objs)
+            tickets_list_json = map(lambda tick : tick.get_json(), ticket_objs)
             ret = {
                 'tickets' : tickets_list_json
             }

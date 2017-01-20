@@ -80,7 +80,7 @@ class Section_Bids(Resource):
         if 'error' in section_bid_objs:
             return responses.error(section_bid_objs['error'], 500)
         else:
-            section_bids = map(lambda sb : sb.get_json(verbose=False), section_bid_objs['section_bids'])
+            section_bids = map(lambda sb : sb.get_json(), section_bid_objs['section_bids'])
             data = {
                 'section_bids': section_bids
             }
