@@ -115,3 +115,31 @@ class Tickets(Resource):
             'tickets_created': created_tickets_json
         }
         return responses.success(data, 201)
+
+class Ticket(Resource):
+    '''
+    URL Endpoint: `/tickets/<int:ticket_id>`
+    Allowed methods: GET
+    '''
+
+    decorators = [login_required]
+
+    def get(self, ticket_id):
+        '''
+        GET `/tickets/<int:ticket_id>`
+            returns:
+                ticket json
+                {'type':str,'id':int,'price':float,'path_to_ticket':str,'seller':json
+                'concert':json, 'listed_at':datetime,'section':json}
+            errors:
+                422 - invalid post body values
+                500 - unkown model error
+        '''
+        ticket_query = ticket.Ticket.get_ticket_by_id(ticket_id)
+        if 'error' in ticket_query:
+            return responses.error(ticket_query['error'], 404)
+        ticket_obj = ticket_query['ticket']
+
+        ret = {'ticket':  ticket_obj.get_json()}
+        return responses.success(ret, 200)
+
