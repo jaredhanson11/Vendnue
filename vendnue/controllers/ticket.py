@@ -1,6 +1,6 @@
 from flask_restful import Resource, request
 from flask_login import login_required, current_user
-from ..models import ticket
+from ..models import ticket, section, concert
 from ..utils import *
 
 class Tickets(Resource):
@@ -21,6 +21,24 @@ class Tickets(Resource):
                 422 - invalid post body values
                 500 - unkown model error
         '''
+        # assert that section_id, and concert_id exist
+        # assert that the section_id and concert_id are related
+        assert_msg = ''
+        section_resp = section.Section.get_section_by_id(section_id)
+        if 'error' in section_resp:
+            assert_msg += section_resp['error'] + '\n'
+        concert_resp = concert.Concert.get_concert_by_id(concert_id)
+        if 'error' in concert_resp:
+            assert_msg += concert_resp['error']
+        if len(assert_msg) > 0:
+            return responses.error(assert_msg, status_code=404)
+        else:
+            # we know the section, concert exist
+            # check if related
+            section_obj = section_resp['section']
+            if not section_obj.is_related_to_concert_with_id(concert_id):
+                return responses.error('The section and concert are not related.', status_code=404)
+
         try:
             concert_id = int(concert_id)
             section_id = int(section_id)
@@ -52,6 +70,24 @@ class Tickets(Resource):
                 422 - invalid post body values
                 500 - unkown model error
         '''
+        # assert that section_id, and concert_id exist
+        # assert that the section_id and concert_id are related
+        assert_msg = ''
+        section_resp = section.Section.get_section_by_id(section_id)
+        if 'error' in section_resp:
+            assert_msg += section_resp['error'] + '\n'
+        concert_resp = concert.Concert.get_concert_by_id(concert_id)
+        if 'error' in concert_resp:
+            assert_msg += concert_resp['error']
+        if len(assert_msg) > 0:
+            return responses.error(assert_msg, status_code=404)
+        else:
+            # we know the section, concert exist
+            # check if related
+            section_obj = section_resp['section']
+            if not section_obj.is_related_to_concert_with_id(concert_id):
+                return responses.error('The section and concert are not related.', status_code=404)
+
         try:
             concert_id = int(concert_id)
             section_id = int(section_id)

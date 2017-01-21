@@ -20,6 +20,8 @@ def add_resources():
 
     ### Section Bid routes ###
     api.add_resource(section_bid.Section_Bids, '/concerts/<int:concert_id>/sections/<int:section_id>/section_bids/')
+    api.add_resource(section_bid.Section_Bid, '/section_bids/<int:section_bid_id>')
 
     ### Artist routes ###
     api.add_resource(artist.Artist, '/artists/<int:artist_id>')
+    api.add_resource(artist.Artists, '/artists/')

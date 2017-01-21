@@ -34,6 +34,7 @@ class Concert(db.Model):
             return model_responses.error('there was an integrity error')
         return model_responses({'concert_id':new_concert.id})
 
+
     @staticmethod
     def get_concert_by_id(concert_id):
         concert_obj = Concert.query.get(concert_id)

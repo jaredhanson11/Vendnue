@@ -40,3 +40,14 @@ class Section(db.Model):
         except IntegrityError:
             return model_responses.error('there was an integrity error')
         return model_responses.success({'section_id':new_section.id})
+
+    @staticmethod
+    def get_section_by_id(section_id):
+        section_obj = Section.query.get(section_id)
+        if section_obj is None:
+            return model_responses.error('Section does not exist')
+        ret = {'section': section_obj}
+        return model_responses.success(ret)
+
+    def is_related_to_concert_with_id(self, concert_id):
+        return self.map.concert_id == concert_id
