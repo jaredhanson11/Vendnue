@@ -19,7 +19,7 @@ class Tickets(Resource):
                 {'tickets': [ <ticket json> ]}
             errors:
                 422 - invalid post body values
-                500 - unkown model error
+                404 - resource does not exist
         '''
         # assert that section_id, and concert_id exist
         # assert that the section_id and concert_id are related
@@ -67,8 +67,8 @@ class Tickets(Resource):
                 {'created_tickets': [ <int> ]}
             errors:
                 400 - invalid post body keys
+                404 - resource does not exist
                 422 - invalid post body values
-                500 - unkown model error
         '''
         # assert that section_id, and concert_id exist
         # assert that the section_id and concert_id are related
@@ -132,8 +132,7 @@ class Ticket(Resource):
                 {'type':str,'id':int,'price':float,'path_to_ticket':str,'seller':json
                 'concert':json, 'listed_at':datetime,'section':json}
             errors:
-                422 - invalid post body values
-                500 - unkown model error
+                404 - ticket does not exist
         '''
         ticket_query = ticket.Ticket.get_ticket_by_id(ticket_id)
         if 'error' in ticket_query:

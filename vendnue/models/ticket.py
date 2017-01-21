@@ -21,6 +21,14 @@ class Ticket(db.Model):
     # section through backref
 
     @staticmethod
+    def get_ticket_by_id(ticket_id):
+        ticket_obj = Ticket.query.get(ticket_id)
+        if ticket_obj is None:
+            return model_responses.error('Ticket does not exist')
+        ret = {'ticket': ticket_obj}
+        return model_responses.success(ret)
+
+    @staticmethod
     def get_tickets_by_section_id(section_id):
         tickets = Ticket.query.filter(Ticket.section_id == section_id).all()
         if tickets is None:
