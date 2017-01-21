@@ -144,7 +144,7 @@ class Section_Bid(Resource):
         '''
         section_bid_query = section_bid.Section_Bid.get_section_bid_by_id(section_bid_id)
         if 'error' in section_bid_query:
-            return responses.error(section_bid_query['error'], 500)
+            return responses.error(section_bid_query['error'], 404)
         section_bid_obj = section_bid_query['section_bid']
         ret = {'section_bid':  section_bid_obj.get_json()}
         return responses.success(ret, 200)

@@ -51,7 +51,7 @@ class Artists(Resource):
             get_artists = artist.Artist.get_all_artists()
             if 'error' in get_artists:
                 ## Need better error handling
-                return responses.error(get_artists['error'], 400)
+                return responses.error(get_artists['error'], 404)
 
             artist_objs = get_artists['artists']
             artists_json = map(lambda artist_obj: artist_obj.get_json(), artist_objs)

@@ -70,6 +70,8 @@ class Users(Resource):
 
         # You can only get the information for your own profile
         user_query = user.User.get_users()
+        if 'error' in user_query:
+            return responses.error(user_query['error'])
         user_objs = user_query['users']
         user_list_json = map(lambda user_obj: user_obj.get_json(verbose=False), user_objs)
         ret = {
