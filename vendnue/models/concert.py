@@ -46,8 +46,11 @@ class Concert(db.Model):
 
     @staticmethod
     def get_concerts_desc():
+        concert_objs = Concert.query.order_by(Concert.date.desc())
+        if concert_objs is None:
+            return model_responses.error('There are no concert objects.')
         ret = {
-            'concerts': Concert.query.order_by(Concert.date.desc())
+            'concerts': concert_objs
         }
         return model_responses.success(ret)
 
