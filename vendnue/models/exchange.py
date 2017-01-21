@@ -1,8 +1,7 @@
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import inspect
 from section_bid import Section_Bid
 from ticket import Ticket
-
-from copy import copy
 
 from cleared_section_bid import Cleared_Section_Bid
 from sold_ticket import Sold_Ticket
@@ -74,6 +73,7 @@ def __reduce_price_ids_wrapper__(ticket_id_list, num_tix):
 def __create_cleared_section_bid__(section_bid_obj):
 
     section_bid_attr = __get_attributes__(section_bid_obj)
+    print section_bid_attr
 
     if 'section' in section_bid_attr:
         print 'This should never be here'
@@ -96,6 +96,6 @@ def __create_sold_tickets__(ticket_ids_list, section_bid_id):
         db.session.delete(ticket_obj)
 
 def __get_attributes__(obj):
-    obj_attr = copy(obj.__dict__)
+    obj_attr = inspect(obj).dict
     obj_attr.pop(SA_INSTANCE_STATE)
     return obj_attr

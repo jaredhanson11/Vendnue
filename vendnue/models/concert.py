@@ -34,6 +34,7 @@ class Concert(db.Model):
             return model_responses.error('there was an integrity error')
         return model_responses({'concert_id':new_concert.id})
 
+
     @staticmethod
     def get_concert_by_id(concert_id):
         concert_obj = Concert.query.get(concert_id)
@@ -45,8 +46,11 @@ class Concert(db.Model):
 
     @staticmethod
     def get_concerts_desc():
+        concert_objs = Concert.query.order_by(Concert.date.desc())
+        if concert_objs is None:
+            return model_responses.error('There are no concert objects.')
         ret = {
-            'concerts': Concert.query.order_by(Concert.date.desc())
+            'concerts': concert_objs
         }
         return model_responses.success(ret)
 

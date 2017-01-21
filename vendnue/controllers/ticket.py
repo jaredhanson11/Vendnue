@@ -1,6 +1,6 @@
 from flask_restful import Resource, request
 from flask_login import login_required, current_user
-from ..models import ticket
+from ..models import ticket, section, concert
 from ..utils import *
 
 class Tickets(Resource):
@@ -19,8 +19,26 @@ class Tickets(Resource):
                 {'tickets': [ <ticket json> ]}
             errors:
                 422 - invalid post body values
-                500 - unkown model error
+                404 - resource does not exist
         '''
+        # assert that section_id, and concert_id exist
+        # assert that the section_id and concert_id are related
+        assert_msg = ''
+        section_resp = section.Section.get_section_by_id(section_id)
+        if 'error' in section_resp:
+            assert_msg += section_resp['error'] + '\n'
+        concert_resp = concert.Concert.get_concert_by_id(concert_id)
+        if 'error' in concert_resp:
+            assert_msg += concert_resp['error']
+        if len(assert_msg) > 0:
+            return responses.error(assert_msg, status_code=404)
+        else:
+            # we know the section, concert exist
+            # check if related
+            section_obj = section_resp['section']
+            if not section_obj.is_related_to_concert_with_id(concert_id):
+                return responses.error('The section and concert are not related.', status_code=404)
+
         try:
             concert_id = int(concert_id)
             section_id = int(section_id)
@@ -49,9 +67,27 @@ class Tickets(Resource):
                 {'created_tickets': [ <int> ]}
             errors:
                 400 - invalid post body keys
+                404 - resource does not exist
                 422 - invalid post body values
-                500 - unkown model error
         '''
+        # assert that section_id, and concert_id exist
+        # assert that the section_id and concert_id are related
+        assert_msg = ''
+        section_resp = section.Section.get_section_by_id(section_id)
+        if 'error' in section_resp:
+            assert_msg += section_resp['error'] + '\n'
+        concert_resp = concert.Concert.get_concert_by_id(concert_id)
+        if 'error' in concert_resp:
+            assert_msg += concert_resp['error']
+        if len(assert_msg) > 0:
+            return responses.error(assert_msg, status_code=404)
+        else:
+            # we know the section, concert exist
+            # check if related
+            section_obj = section_resp['section']
+            if not section_obj.is_related_to_concert_with_id(concert_id):
+                return responses.error('The section and concert are not related.', status_code=404)
+
         try:
             concert_id = int(concert_id)
             section_id = int(section_id)
@@ -79,3 +115,30 @@ class Tickets(Resource):
             'tickets_created': created_tickets_json
         }
         return responses.success(data, 201)
+
+class Ticket(Resource):
+    '''
+    URL Endpoint: `/tickets/<int:ticket_id>`
+    Allowed methods: GET
+    '''
+
+    decorators = [login_required]
+
+    def get(self, ticket_id):
+        '''
+        GET `/tickets/<int:ticket_id>`
+            returns:
+                ticket json
+                {'type':str,'id':int,'price':float,'path_to_ticket':str,'seller':json
+                'concert':json, 'listed_at':datetime,'section':json}
+            errors:
+                404 - ticket does not exist
+        '''
+        ticket_query = ticket.Ticket.get_ticket_by_id(ticket_id)
+        if 'error' in ticket_query:
+            return responses.error(ticket_query['error'], 404)
+        ticket_obj = ticket_query['ticket']
+
+        ret = {'ticket':  ticket_obj.get_json()}
+        return responses.success(ret, 200)
+

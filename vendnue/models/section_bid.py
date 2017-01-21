@@ -38,6 +38,15 @@ class Section_Bid(db.Model):
             })
         return section_bid_json
 
+
+    @staticmethod
+    def get_section_bid_by_id(section_bid_id):
+        section_bid_obj = Section_Bid.query.get(section_bid_id)
+        if section_bid_obj is None:
+            return model_responses.error('Section Bid does not exist')
+        ret = {'section_bid': section_bid_obj}
+        return model_responses.success(ret)
+
     @staticmethod
     def create_section_bid(bidder_id, concert_id, section_id, num_tickets, bid_price_per_ticket):
         bid_price_total = num_tickets * float(bid_price_per_ticket)
@@ -72,3 +81,4 @@ class Section_Bid(db.Model):
             return model_responses.success(objs)
         else:
             return model_responses.error('there are no section bids.')
+

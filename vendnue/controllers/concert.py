@@ -21,7 +21,7 @@ class Concerts(Resource):
         '''
         concerts_query = concert.Concert.get_concerts_desc()
         if 'error' in concerts_query:
-            return responses.error('There was an error getting concerts', 500)
+            return responses.error(concerts_query['error'], 500)
         concert_objs = concerts_query['concerts']
         concerts_list_json = map(lambda concert_obj: concert_obj.get_json(verbose=False), concert_objs)
         
@@ -40,10 +40,10 @@ class Concert(Resource):
             pass
     '''
     def get(self, concert_id):
-        concert_get = concert.Concert.get_concert_by_id(concert_id)
-        if 'error' in concert_get:
-            return responses.error('The concert you\'re searching for does not exist', 404)
-        concert_obj = concert_get['concert']
+        concert_query = concert.Concert.get_concert_by_id(concert_id)
+        if 'error' in concert_query:
+            return responses.error(concert_query['error'], 404)
+        concert_obj = concert_query['concert']
 
         ret = {'concert':  concert_obj.get_json()}
         return responses.success(ret, 200)

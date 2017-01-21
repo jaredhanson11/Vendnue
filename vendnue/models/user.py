@@ -92,8 +92,11 @@ class User(db.Model):
 
     @staticmethod
     def get_users():
+        user_objs = User.query.order_by(User.created_at.desc())
+        if user_objs is None:
+            return model_responses.error('There are no users.')
         ret = {
-            'users': User.query.order_by(User.created_at.desc())
+            'users': user_objs
         }
         return model_responses.success(ret)
 
