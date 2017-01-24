@@ -29,3 +29,4 @@ def add_resources():
 
     ### Search routes ###
     api.add_resource(search.Search_Bar, '/search/bar')
+    api.add_resource(search.Search, '/search')

@@ -56,7 +56,7 @@ class Concert(db.Model):
 
     @staticmethod
     def get_top_n_concerts_by_query(query, n=10):
-        concert_objs = Concert.query.filter(Concert.name.contains(query)).limit(n)
+        concert_objs = Concert.query.filter(Concert.name.contains(query)).limit(n).all()
         if concert_objs is None:
             return model_responses.error('There are no concerts that contain the query string ' + query)
         ret = {
