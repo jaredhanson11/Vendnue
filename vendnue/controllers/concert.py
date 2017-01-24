@@ -24,7 +24,7 @@ class Concerts(Resource):
             return responses.error(concerts_query['error'], 500)
         concert_objs = concerts_query['concerts']
         concerts_list_json = map(lambda concert_obj: concert_obj.get_json(verbose=False), concert_objs)
-        
+
         ret = {'concerts': concerts_list_json}
         return responses.success(ret, 200)
 
