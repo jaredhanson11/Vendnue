@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Immutable from 'immutable';
 
 import { actionCreators } from '../actions';
+import GeneralAdmissionMap from '../components/GeneralAdmissionMap.jsx';
 
 class ConcertContainer extends React.Component {
 
@@ -17,7 +18,7 @@ class ConcertContainer extends React.Component {
 
         if (concert.isLoading) {return (<h1>Loading...</h1>)}
         if (concert.error) {return (<p>Error</p>)}
-        if (concert.isLoaded) {return (<p>{JSON.stringify(concert.payload)}</p>)} return (
+        if (concert.isLoaded) {return (<GeneralAdmissionMap />)} return (
            <p>"this shouldn't happen."</p>
          );
     }

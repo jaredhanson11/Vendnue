@@ -4,7 +4,8 @@ import { Provider } from 'react-redux';
 
 import { applyMiddleware, createStore } from 'redux';
 import { configureStore } from '../store.js';
-import { ConcertContainer } from '../containers';
+import { MainLayout, ConcertContainer } from '../containers';
+
 import Navbar from '../components/VendnueNavbar.jsx';
 
 var initialState = {
@@ -20,10 +21,10 @@ var initialState = {
 var store = configureStore(initialState);
 
 ReactDOM.render(
-       (<Provider store={store}>
-        <div>
+    <Provider store={store}>
+    <div>
         <Navbar />
-         <ConcertContainer />
-          </div>
-         </Provider>
-       ),document.getElementById('main'));
+        <MainLayout mainBody={ConcertContainer} />
+    </div>
+    </Provider>
+    ,document.getElementById('main'));

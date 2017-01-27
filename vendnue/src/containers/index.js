@@ -1,3 +1,4 @@
 import ConcertContainer from './ConcertContainer.jsx';
+import MainLayout from './Layout.jsx';
 
-export { ConcertContainer };
+export { MainLayout, ConcertContainer };
