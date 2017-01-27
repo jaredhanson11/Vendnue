@@ -6,11 +6,12 @@ from ..utils import *
 
 class Signup(Resource):
     def post(self):
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        email = request.form['email']
-        plaintext_password = request.form['password']
 
+        resp = request.get_json()
+        first_name = resp['first_name']
+        last_name = resp['last_name']
+        email = resp['email']
+        plaintext_password = resp['password']
         user_exists = user.User.get_user_by_email(email)
         if user_exists:
             return responses.error('This email is already in use.', 409)
@@ -32,9 +33,9 @@ class Signup(Resource):
 
 class Login(Resource):
     def post(self):
-        email = str(request.form['email'])
-        plaintext_password = str(request.form['password'])
-
+        resp = request.get_json()
+        email = str(resp['email'])
+        plaintext_password = str(resp['password'])
         user_exists = user.User.get_user_by_email(email)
         if user_exists:
             # now check if email and password combination in exist
