@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import { applyMiddleware, createStore } from 'redux';
 import { configureStore } from '../store.js';
-import { MainLayout, ConcertContainer } from '../containers';
+import { ConcertContainer } from '../containers';
 
 import Navbar from '../components/VendnueNavbar.jsx';
 
@@ -24,7 +24,7 @@ ReactDOM.render(
     <Provider store={store}>
     <div>
         <Navbar />
-        <MainLayout mainBody={ConcertContainer} />
+        <ConcertContainer />
     </div>
     </Provider>
     ,document.getElementById('main'));

@@ -4,6 +4,7 @@ import Immutable from 'immutable';
 
 import { actionCreators } from '../actions';
 import GeneralAdmissionMap from '../components/GeneralAdmissionMap.jsx';
+import MainLayout from './Layout.jsx';
 
 class ConcertContainer extends React.Component {
 
@@ -16,11 +17,16 @@ class ConcertContainer extends React.Component {
     render(){
         var concert = this.props.concert;
 
-        if (concert.isLoading) {return (<h1>Loading...</h1>)}
-        if (concert.error) {return (<p>Error</p>)}
-        if (concert.isLoaded) {return (<GeneralAdmissionMap />)} return (
-           <p>"this shouldn't happen."</p>
-         );
+        if (concert.isLoading) {
+            return (<h1>Loading...</h1>)
+        }
+        if (concert.error) {
+            return (<p>Error</p>)
+        }
+        if (concert.isLoaded) {
+            return (<MainLayout  mainTitle='Concert' mainBody={GeneralAdmissionMap} />)
+        }
+        return (<p>"this shouldn't happen."</p>);
     }
 
 }
