@@ -1,13 +1,11 @@
-import { getConcert } from './concert.js';
-
+import { getConcert, actionTypes as concertActionTypes } from './concert.js';
 var actionCreators = {
     getConcert
 }
 
-var actionTypes = {
-    GET_CONCERT_REQUEST: 'GET_CONCERT_REQUEST',
-    GET_CONCERT_SUCCESS: 'GET_CONCERT_SUCCESS',
-    GET_CONCERT_FAILUREL 'GET_CONCERT_FAILURE'
-}
+var actionTypes = Object.assign({},
+        concertActionTypes
+    );
+
 
 export { actionCreators, actionTypes }

@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Immutable from 'immutable';
 
 import { actionCreators } from '../actions';
-
-import Immutable from 'immutable';
 
 class ConcertContainer extends React.Component {
 

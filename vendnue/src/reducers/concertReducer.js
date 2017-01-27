@@ -1,5 +1,5 @@
 import Immutable from 'immutable';
-import actionTypes from '../actions';
+import { actionTypes } from '../actions';
 
 var concertReducer = function(state={}, action) {
     switch (action.type) {
@@ -9,7 +9,7 @@ var concertReducer = function(state={}, action) {
             console.log('LOADING.....');
             newState.isLoading = true;
             return newState;
-        case actionTypes.GET_CONCERT_SUCCESS::
+        case actionTypes.GET_CONCERT_SUCCESS:
             var newState = Immutable.fromJS(state);
             newState = newState.toJS();
             console.log('SUCCESS!!')
