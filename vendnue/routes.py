@@ -1,5 +1,5 @@
 from . import api
-from controllers import auth, user, concert, ticket, section_bid, artist
+from controllers import auth, user, concert, ticket, section_bid, artist, search
 
 def add_resources():
     ### Auth routes ###
@@ -26,3 +26,7 @@ def add_resources():
     ### Artist routes ###
     api.add_resource(artist.Artist, '/artists/<int:artist_id>')
     api.add_resource(artist.Artists, '/artists/')
+
+    ### Search routes ###
+    api.add_resource(search.Search_Bar, '/search/bar')
+    api.add_resource(search.Search, '/search')
