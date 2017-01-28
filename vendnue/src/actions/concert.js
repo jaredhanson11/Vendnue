@@ -12,7 +12,7 @@ var actionTypes = {
 
 function getConcert(concertID) {
 
-    const url = '/api/concerts/' + concertID;
+    const url = 'http://127.0.0.1:5000/concerts/' + concertID;
     console.log(url);
 
     return {

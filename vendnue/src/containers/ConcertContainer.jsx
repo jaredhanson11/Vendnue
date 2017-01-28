@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
+import Loader from 'react-loader';
 
 import { actionCreators } from '../actions';
-import GeneralAdmissionMap from '../components/GeneralAdmissionMap.jsx';
 import MainLayout from './Layout.jsx';
+
+import ConcertContainerMainBody from './ConcertContainerMainBody.jsx';
+
 
 class ConcertContainer extends React.Component {
 
@@ -17,16 +20,12 @@ class ConcertContainer extends React.Component {
     render(){
         var concert = this.props.concert;
 
-        if (concert.isLoading) {
-            return (<h1>Loading...</h1>)
-        }
-        if (concert.error) {
-            return (<p>Error</p>)
-        }
-        if (concert.isLoaded) {
-            return (<MainLayout  mainTitle='Concert' mainBody={GeneralAdmissionMap} />)
-        }
-        return (<p>"this shouldn't happen."</p>);
+        if (concert.error) {return (<p>Error</p>)}
+        return (
+            <Loader loaded={concert.isLoaded}>
+                <MainLayout mainTitle='Concert' mainBody={ConcertContainerMainBody} />
+            </Loader>
+        )
     }
 
 }
