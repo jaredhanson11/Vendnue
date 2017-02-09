@@ -7,6 +7,7 @@ import { actionCreators } from '../actions';
 import MainLayout from './Layout.jsx';
 
 import ConcertContainerMainBody from './ConcertContainerMainBody.jsx';
+import ConcertContainerMainTitle from './ConcertContainerMainTitle.jsx';
 
 
 class ConcertContainer extends React.Component {
@@ -17,13 +18,18 @@ class ConcertContainer extends React.Component {
         this.props.dispatch(actionCreators.getConcert(concertID));
     }
 
+    // sectionSelect(e) {
+    //   e.event.target.id
+    //}
+
     render(){
         var concert = this.props.concert;
-
         if (concert.error) {return (<p>Error</p>)}
+        const MainBody = (<ConcertContainerMainBody concert={concert} />)
+        const MainTitle = (<ConcertContainerMainTitle concert={concert}/ >)
         return (
             <Loader loaded={concert.isLoaded}>
-                <MainLayout mainTitle='Concert' mainBody={ConcertContainerMainBody} />
+                <MainLayout mainBody={MainBody} mainTitle={MainTitle} />
             </Loader>
         )
     }

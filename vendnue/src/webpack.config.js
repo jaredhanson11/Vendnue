@@ -3,7 +3,8 @@ var webpack = require('webpack');
 
 var config = {
     entry: {
-        concerts: './concerts/index.jsx'
+        concerts: './concerts/index.jsx',
+        concert: './concert/index.jsx'
      },
     output: {
         path: path.resolve(__dirname, 'static', 'js'),
