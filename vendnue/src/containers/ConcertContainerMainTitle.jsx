@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { Panel } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 
 export default class ConcertContainerMainTitle extends React.Component {
     render() {
-        console.log(this.props);
         if (this.props.concert.payload.concert === undefined){return <div></div>}
         var artists = this.props.concert.payload.concert.artists_performing.map(
             function(curr) {
@@ -25,11 +24,13 @@ export default class ConcertContainerMainTitle extends React.Component {
         console.log(artists);
         console.log(dateObj.toString());
         return (
-            <Panel style={{leftPadding: '0px'}} >
-                <h2>{this.props.concert.payload.concert.name}</h2>
-                <h4>{artists}</h4>
-                <h4>{dateString}</h4>
-            </Panel>
+            <Row style={{leftMargin: '0px'}} >
+                <Col xs={12} style={{border: 'solid thin blue'}} >
+                <div>{this.props.concert.payload.concert.name}</div>
+                <div>{artists}</div>
+                <div>{dateString}</div>
+                </Col>
+            </Row>
         )
     }
 }

@@ -11,8 +11,8 @@ export default class MainLayout extends React.Component {
         var MainTitleComponent = this.props.mainTitle;
         return (
             <Grid fluid >
-                <Row style={styles.addBorder('red')} >
-                    <Col smOffset={1} sm={10} style={Object.assign({wordWrap: 'break-word'}, styles.addBorder('white'))} >
+                <Row>
+                    <Col xs={12} >
                         {MainTitleComponent}
                         {MainBodyComponent}
                     </Col>

@@ -8,7 +8,7 @@ export default class VendnueNavBar extends React.Component {
 
     render() {
         return(
-            <Navbar fluid inverse >
+            <Navbar style={{marginBottom: '0px'}} fluid inverse >
                 <Navbar.Header>
                     <Navbar.Brand>
                         <a href='/'>Vendnue</a>
