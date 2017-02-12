@@ -22,7 +22,6 @@ class ConcertContainer extends React.Component {
         console.log('Handle data call');
         this.props.dispatch({type : actionTypes.SHOW_DATA_MODAL, activeModal: section});
     }
-
     // sectionSelect(e) {
     //   e.event.target.id
     //}
@@ -30,11 +29,10 @@ class ConcertContainer extends React.Component {
     render(){
         var concert = this.props.concert;
         if (concert.error) {return (<p>Error</p>)}
-        const MainBody = (<ConcertContainerMainBody concert={concert} handleDataModal={this.handleDataModal} />)
-        const MainTitle = (<ConcertContainerMainTitle concert={concert}/ >)
         return (
             <Loader loaded={concert.isLoaded}>
-                <MainLayout mainBody={MainBody} mainTitle={MainTitle} />
+                <ConcertContainerMainTitle concert={concert}/ >
+                <ConcertContainerMainBody concert={concert} />
             </Loader>
         )
     }

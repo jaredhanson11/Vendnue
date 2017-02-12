@@ -9,14 +9,40 @@ import { ConcertContainer } from '../containers';
 import Navbar from '../components/VendnueNavbar.jsx';
 
 var initialState = {
-    concert: {
-        isLoading: false,
-        isLoaded: false,
-        payload: '',
-        error: '',
-        errorMessage: '',
-        showDataModal: false,
-        activeModal: ''
+    concertApiCall: {
+        loading: false,
+        error: false,
+        errorMessage: ''
+    },
+    socialApiCall: {
+        loading: false,
+        error: false,
+        errorMessage: ''
+    },
+    navBar:{
+        isLoggedIn: false,
+        user: {}
+    },
+    title: {
+        concertName: '',
+        artistsPerforming: [],
+        concertDate: ''
+    },
+    mapBox: {
+        map: {
+            activeSection: '',
+            sections: []
+        },
+        concertDataSummary: {}
+    },
+    ticketsBox: {
+        ticketsExchange: {
+            sections: [],
+            activeSection: ''
+        }
+    },
+    socialMediaBox: {
+        concertName: '',
     }
 }
 
