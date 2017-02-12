@@ -18,14 +18,6 @@ class ConcertContainer extends React.Component {
         this.props.dispatch(actionCreators.getConcert(concertID));
     }
 
-    handleGADataModal() {
-        this.props.dispatch({type : actionTypes.SHOW_DATA_MODAL, activeModal: 'GA'});
-    }
-
-    handleVIPDataModal() {
-        this.props.dispatch({type : actionTypes.SHOW_DATA_MODAL, activeModal: 'VIP'});
-    }
-
     // sectionSelect(e) {
     //   e.event.target.id
     //}
@@ -33,11 +25,10 @@ class ConcertContainer extends React.Component {
     render(){
         var concert = this.props.concert;
         if (concert.error) {return (<p>Error</p>)}
-        const MainBody = (<ConcertContainerMainBody concert={concert} handleGADataModal={this.handleGADataModal} handleVIPDataModal={this.handleVIPDataModal} />)
-        const MainTitle = (<ConcertContainerMainTitle concert={concert}/ >)
         return (
             <Loader loaded={concert.isLoaded}>
-                <MainLayout mainBody={MainBody} mainTitle={MainTitle} />
+                <ConcertContainerMainTitle concert={concert}/ >
+                <ConcertContainerMainBody concert={concert} />
             </Loader>
         )
     }
