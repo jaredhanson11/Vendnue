@@ -1,6 +1,16 @@
 import Immutable from 'immutable';
 import { actionTypes } from '../actions';
 
+export {
+    concertApiCallReducer,
+    socialApiCallReducer,
+    navBarReducer,
+    titleReducer,
+    mapBoxReducer,
+    ticketsBoxReducer,
+    socialMediaBoxReducer
+}
+
 var concertReducer = function(state={}, action) {
     switch (action.type) {
         case actionTypes.GET_CONCERT_REQUEST:
