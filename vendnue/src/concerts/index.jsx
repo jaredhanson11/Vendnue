@@ -14,7 +14,9 @@ var initialState = {
         isLoaded: false,
         payload: '',
         error: '',
-        errorMessage: ''
+        errorMessage: '',
+        showDataModal: false,
+        activeModal: ''
     }
 }
 

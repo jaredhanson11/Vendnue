@@ -9,7 +9,7 @@ export default class ConcertContainerMainTitle extends React.Component {
             function(curr) {
                 const artistUrl = '/artists/' + curr.id;
                 return(
-                    <li style={{float:'left', margin: '0px', padding:'2 px'}}><a href={artistUrl} >{curr.name}</a></li>
+                    <li style={{float:'left', margin: '1px'}}><a href={artistUrl} >{curr.name}</a></li>
                 )
             });
         Date.prototype.getDayOfWeek = function(){

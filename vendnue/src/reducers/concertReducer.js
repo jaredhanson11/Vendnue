@@ -23,10 +23,17 @@ var concertReducer = function(state={}, action) {
             return newState;
         case actionTypes.GET_CONCERT_FAILURE:
             var newState = Immutable.fromJS(state);
-            newState = newState.toJS();;
+            newState = newState.toJS();
             console.log('FAILED');
             newState.isLoading = false;
             newState.error = action.payload;
+            return newState;
+        case actionTypes.SHOW_DATA_MODAL:
+            var newState = Immutable.fromJS(state);
+            newState = newState.toJS();
+            console.log('show data');
+            newState.showDataModal = true;
+            newState.activeModal = action.activeModal;
             return newState;
         default:
             var newState = Immutable.fromJS(state);

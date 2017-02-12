@@ -8,12 +8,13 @@ import ConcertMapSection from '../components/ConcertMapSection.jsx';
 import SectionDataSection from '../components/SectionDataSection.jsx';
 
 export default class ConcertContainerMainBody extends React.Component{
+
     render(){
         return (
         <div>
             <Row style={{border: 'solid 1px red', height: '80%'}} >
                 <Col xs={6} style={{height: '100%', border: 'solid 1px black'}} >
-                    <ConcertMapSection />
+                    <ConcertMapSection concert={this.props.concert} handleGADataModal={this.props.handleGADataModal} handleVIPDataModal={this.props.handleVIPDataModal} />
                     <SectionDataSection />
                 </Col>
                 <Col xs={6} style={{height: '100%', border: 'solid 1px green'}}></Col>
