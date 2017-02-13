@@ -38,4 +38,16 @@ function getConcert(concertID) {
     }
 }
 
-export { getConcert, actionTypes };
+function selectSection(sectionId) {
+    return {
+        type: SELECT_SECTION,
+        section: sectionId
+    }
+}
+
+var concertActionCreators = {
+    selectSection,
+    getConcert
+}
+
+export { concertActionCreators, actionTypes };

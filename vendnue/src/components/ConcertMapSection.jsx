@@ -7,10 +7,11 @@ import GeneralAdmissionMap from './GeneralAdmissionMap.jsx';
 export default class ConcertMapSection extends React.Component{
 
     render(){
-
         return (
                 <Row style={jsCSS.mainRow} >
-                    <Col xsOffset={2} xs={8} ><GeneralAdmissionMap map={this.props.map} /></Col>
+                    <Col xsOffset={2} xs={8} >
+                        <GeneralAdmissionMap map={this.props.map} actions={this.props.actions}/>
+                    </Col>
                 </Row>
         )
     }

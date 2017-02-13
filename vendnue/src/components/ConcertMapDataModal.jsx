@@ -5,7 +5,6 @@ import { Modal, Row, Col, Button, Tabs, Tab} from 'react-bootstrap';
 
 export default class ConcertMapDataModal extends React.Component {
     render() {
-        console.log(this.props.activeModal);
         return (
             <Row>
                 <Col xs={6} style={styles.noGutters} >

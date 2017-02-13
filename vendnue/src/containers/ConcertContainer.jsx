@@ -17,18 +17,19 @@ class ConcertContainer extends React.Component {
         this.props.dispatch(actionCreators.getConcert(concertID));
     }
 
-    selectSection(section) {
-        this.props.dispatch({type : actionTypes.SELECT_SECTION, section: section});
+    selectSection(e) {
+        this.props.dispatch(actionCreators.selectSection(e.target.id));
     }
 
     render(){
         if (this.props.concertApiCall.error) {return (<p>Error</p>)}
         return (
             <Loader loaded={!this.props.concertApiCall.loading}>
-                <ConcertContainerMainTitle title={this.props.title.name}/ >
+                <ConcertContainerMainTitle title={this.props.title} />
                 <ConcertContainerMainBody mapBox={this.props.mapBox}
                                           ticketsBox={this.props.ticketsBox}
-                                          socialMediaBox={this.props.socialMediaBox} />
+                                          socialMediaBox={this.props.socialMediaBox}
+                                          actions={{'selectSection': this.selectSection.bind(this)}}/>
             </Loader>
         )
     }

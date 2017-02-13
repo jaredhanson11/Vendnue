@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Row, Col } from 'react-bootstrap';
 
 import { concertContainerMainTitleStyle as jsCSS } from '../static/js/style.js';

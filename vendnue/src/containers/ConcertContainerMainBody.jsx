@@ -16,7 +16,7 @@ export default class ConcertContainerMainBody extends React.Component{
             <div>
                 <Row style={jsCSS.mainRow} >
                     <Col xs={6} style={jsCSS.leftMainOuterDiv} >
-                        <ConcertMapSection map={this.props.mapBox.map}  />
+                        <ConcertMapSection map={this.props.mapBox.map} actions={this.props.actions} />
                         <SectionDataSection concertDataSummary={this.props.mapBox.concertDataSummary} />
                     </Col>
                     <Col xs={6} style={jsCSS.rightMainOuterDiv} >

@@ -19,61 +19,89 @@ export const concertContainerMainBodyStyle = {
             height: '75%'
         },
         devBorder('blue')
-        ),
+    ),
     leftMainOuterDiv: Object.assign({
         },
         fullHeight,
         devBorder('green')
-        ),
+    ),
     rightMainOuterDiv: Object.assign({
         },
         fullHeight,
         devBorder('red')
-        ),
+    ),
     footerOuterDiv: Object.assign({
-        height: '20%'
+            height: '20%'
         })
 };
 export const concertContainerMainTitleStyle = {
     mainRow: Object.assign({
-        leftMargin: '0px'
+            leftMargin: '0px'
         }),
 
     mainCol: Object.assign({
         },
         devBorder('blue')
-        ),
+    ),
 
     name: Object.assign({
-        'float': 'left'
-    }),
+            'float': 'left'
+        }),
 
     date: Object.assign({
-        'float': 'right'
-    }),
+            'float': 'right'
+        }),
 
     artistList: Object.assign({
-        clear: 'both'
-    }),
+            clear: 'both'
+        }),
 
     artistName: Object.assign({
-        'float': 'left',
-        margin: '1px'
-    })
+            'float': 'left',
+            margin: '1px'
+        })
 
 };
 export const concertMapSectionStyle = {
     mainRow: Object.assign({
-        height: '60%',
-        marginTop: '10%'
-    })
+            height: '60%',
+            marginTop: '10%'
+        })
 };
 
 export const concertExchangeSectionStyle = {
+    mainRow: Object.assign({
+            height: '60%',
+            marginTop: '10%'
+        }),
+
+    ticketExchange: Object.assign({
+        },
+        devBorder('black')
+    )
 };
 export const concertExchangeRowStyle = {
+    mainRow: Object.assign({
+            height: '60%',
+        }),
+
+    linkToTicket: Object.assign({
+        },
+        fullHeight,
+        devBorder('black')
+    ),
+
+    ticketPrice: Object.assign({
+        },
+        fullHeight,
+        devBorder('black')
+    )
 };
 export const concertExchangeRowPriceStyle = {
+    mainRow: Object.assign({
+        },
+        fullHeight
+        ),
 };
 export const concertExchangeStyle = {
 };
