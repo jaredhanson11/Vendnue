@@ -33,7 +33,7 @@ class Map(db.Model):
             }
         if verbose:
             map_json.update({
-                'sections': map(lambda section_obj: section_obj.get_json(verbose=False), self.sections),
+                'sections': map(lambda section_obj: section_obj.get_json(verbose=True), self.sections),
                 'concert': self.concert.get_json(verbose=False)
             })
 

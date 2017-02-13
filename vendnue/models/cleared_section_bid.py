@@ -38,7 +38,7 @@ class Cleared_Section_Bid(db.Model):
         if verbose:
             cleared_section_bid_json.update({
                 'created_at' : self.created_at.isoformat(),
-                'cleared_at' : self.cleared_atisoformat(),
+                'cleared_at' : self.cleared_at.isoformat(),
                 'concert' : self.concert.get_json(verbose=False),
                 'section' : self.section.get_json(verbose=False),
                 'bidder' : self.bidder.get_json(verbose=False),

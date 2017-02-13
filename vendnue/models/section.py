@@ -12,7 +12,8 @@ class Section(db.Model):
     name = db.Column(db.String(50))
     tickets = db.relationship('Ticket', backref='section', lazy='dynamic')
     sold_tickets = db.relationship('Sold_Ticket', backref='section', lazy='dynamic')
-    bids = db.relationship('Section_Bid', backref='section', lazy='dynamic')
+    section_bids = db.relationship('Section_Bid', backref='section', lazy='dynamic')
+    cleared_section_bids = db.relationship('Cleared_Section_Bid', backref='section', lazy='dynamic')
     map_id = db.Column(db.Integer, db.ForeignKey('maps.id'))
     # map through backref get concert through map object
 
@@ -26,7 +27,8 @@ class Section(db.Model):
             section_json.update({
                 'tickets' :  map(lambda ticket : ticket.get_json(verbose=False), self.tickets),
                 'sold_tickets' : map(lambda sold_ticket : sold_ticket.get_json(verbose=False), self.sold_tickets),
-                'bids' : map(lambda bid : bid.get_json(verbose=False), self.bids),
+                'section_bids' : map(lambda section_bid : section_bid.get_json(verbose=False), self.section_bids),
+                'cleared_section_bids' : map(lambda cleared_section_bid : cleared_section_bid.get_json(verbose=False), self.cleared_section_bids),
                 'map' : self.map.get_json(verbose=False)
             })
         return section_json

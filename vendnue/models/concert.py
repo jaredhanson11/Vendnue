@@ -23,6 +23,7 @@ class Concert(db.Model):
     tickets = db.relationship('Ticket', backref='concert', lazy='dynamic')
     sold_tickets = db.relationship('Sold_Ticket', backref='concert', lazy='dynamic')
     section_bids = db.relationship('Section_Bid', backref='concert', lazy='dynamic')
+    cleared_section_bids = db.relationship('Cleared_Section_Bid', backref='concert', lazy='dynamic')
 
     @staticmethod
     def create_concert(name, date, venue_id):
@@ -71,6 +72,7 @@ class Concert(db.Model):
                 'name': self.name,
                 'date': self.date.isoformat(),
                 'section_bid_summary' : self.get_section_bid_summary(),
+                'cleared_section_bid_summary' : self.get_cleared_section_bid_summary(),
                 'ticket_summary' : self.get_ticket_summary(),
                 'sold_ticket_summary' : self.get_sold_ticket_summary()
             }
@@ -78,11 +80,12 @@ class Concert(db.Model):
         if verbose:
             concert_json.update({
                     'venue': self.venue.get_json(verbose=False),
-                    'map': self.map.get_json(verbose=False),
+                    'map': self.map.get_json(verbose=True),
                     'artists_performing': map(lambda artist_obj: artist_obj.get_json(verbose=False), self.artists_performing),
-                    'sold_tickets': map(lambda sold_ticket_obj: sold_ticket_obj.get_json(verbose=False), self.sold_tickets),
-                    'tickets': map(lambda ticket_obj: ticket_obj.get_json(verbose=False), self.tickets),
-                    'section_bids': map(lambda section_bid_obj: section_bid_obj.get_json(verbose=False), self.section_bids)
+                    'sold_tickets': map(lambda sold_ticket_obj: sold_ticket_obj.get_json(verbose=True), self.sold_tickets),
+                    'tickets': map(lambda ticket_obj: ticket_obj.get_json(verbose=True), self.tickets),
+                    'section_bids': map(lambda section_bid_obj: section_bid_obj.get_json(verbose=True), self.section_bids),
+                    'cleared_section_bids': map(lambda cleared_section_bid_obj: cleared_section_bid_obj.get_json(verbose=True), self.cleared_section_bids)
                 })
         ret = concert_json
 
@@ -115,6 +118,35 @@ class Concert(db.Model):
             ret.update(data)
 
         return ret
+
+    def get_cleared_section_bid_summary(self):
+        bids = map(lambda sb : [sb.bid_price_per_ticket] * sb.num_tickets, self.cleared_section_bids)
+        bids = list(itertools.chain.from_iterable(bids))
+        volume_bids = len(bids)
+
+        # init with 0, update with real bids.
+        # if this is nonzero, then the other params exist
+        ret = {
+            'volume_bids' : volume_bids
+        }
+
+        if volume_bids > 0:
+            average_bid_price = float(sum(bids)) / len(bids)
+            variance_bid_price = np.var(bids)
+            hi_bid_price = max(bids)
+            lo_bid_price = min(bids)
+
+            data = {
+                'average_price' : average_bid_price,
+                'variance_price' : variance_bid_price,
+                'hi_bid_price' : hi_bid_price,
+                'lo_bid_price' : lo_bid_price,
+            }
+            ret.update(data)
+
+        return ret
+
+
 
 
     def get_sold_ticket_summary(self):
