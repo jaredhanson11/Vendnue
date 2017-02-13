@@ -1,14 +1,26 @@
 import { CALL_API } from 'redux-api-middleware';
 
+// actions for concert api call
 const GET_CONCERT_REQUEST = 'GET_CONCERT_REQUEST';
 const GET_CONCERT_SUCCESS =  'GET_CONCERT_SUCCESS';
 const GET_CONCERT_FAILURE = 'GET_CONCERT_FAILURE';
+
+// actions for social api call
+const GET_SOCIAL_REQUEST = 'GET_SOCIAL_REQUEST';
+const GET_SOCIAL_SUCCESS = 'GET_SOCIAL_SUCCESS';
+const GET_SOCIAL_FAILURE = 'GET_SOCIAL_FAILURE';
+
+// navbar
+
 const SHOW_DATA_MODAL = 'SHOW_DATA_MODAL';
 
 var actionTypes = {
     GET_CONCERT_REQUEST,
     GET_CONCERT_SUCCESS,
     GET_CONCERT_FAILURE,
+    GET_SOCIAL_REQUEST,
+    GET_SOCIAL_SUCCESS,
+    GET_SOCIAL_FAILURE,
     SHOW_DATA_MODAL
 }
 

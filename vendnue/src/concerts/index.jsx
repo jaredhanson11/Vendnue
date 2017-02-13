@@ -11,11 +11,13 @@ import Navbar from '../components/VendnueNavbar.jsx';
 var initialState = {
     concertApiCall: {
         loading: false,
+        loaded: false,
         error: false,
         errorMessage: ''
     },
     socialApiCall: {
         loading: false,
+        loaded: false,
         error: false,
         errorMessage: ''
     },
