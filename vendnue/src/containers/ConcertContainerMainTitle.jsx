@@ -2,14 +2,16 @@ import React from 'react';
 
 import { Row, Col } from 'react-bootstrap';
 
+import { concertContainerMainTitleStyle as jsCSS } from '../static/js/style.js';
+
 export default class ConcertContainerMainTitle extends React.Component {
     render() {
         if (this.props.concert.payload.concert === undefined){return <div></div>}
-        var artists = this.props.concert.payload.concert.artists_performing.map(
+        var artists = this.props.title.artistsPerforming.map(
             function(curr) {
                 const artistUrl = '/artists/' + curr.id;
                 return(
-                    <li style={{float:'left', margin: '1px'}}><a href={artistUrl} >{curr.name}</a></li>
+                    <li style={jsCSS.artistName}><a href={artistUrl} >{curr.name}</a></li>
                 )
             });
         Date.prototype.getDayOfWeek = function(){
@@ -20,7 +22,7 @@ export default class ConcertContainerMainTitle extends React.Component {
             return ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][ this.getMonth() ];
         };
 
-        var dateObj = new Date(this.props.concert.payload.concert.date);
+        var dateObj = new Date(this.props.title.concertDate);
         const dateString = dateObj.getDayOfWeek() + ', ' + dateObj.getMonthOfYear() + ' ' + dateObj.getDate();
         var time =  dateObj.toTimeString().split(' ')[0];
         if (time[0] == '0') {
@@ -40,11 +42,11 @@ export default class ConcertContainerMainTitle extends React.Component {
         const dateStringWithTime = dateString + ' at ' + time;
 
         return (
-            <Row style={{leftMargin: '0px'}} >
-                <Col xs={12} style={{border: 'solid thin blue'}} >
-                <div style={{float: 'left'}}>{this.props.concert.payload.concert.name}</div>
-                <div style={{float: 'right'}}>{dateStringWithTime}</div>
-                <div style={{clear: 'both'}}><ul className="list-unstyled">{artists}</ul></div>
+            <Row style={jsCSS.mainRow} >
+                <Col xs={12} style={jsCSS.mainCol}>
+                <div style={jsCSS.name}> {this.props.title.concertName}</div>
+                <div style={jsCSS.date}>{dateStringWithTime}</div>
+                <div style={jsCSS.artistList}><ul className="list-unstyled">{artists}</ul></div>
                 </Col>
             </Row>
         )

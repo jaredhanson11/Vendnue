@@ -4,7 +4,6 @@ import Immutable from 'immutable';
 import Loader from 'react-loader';
 
 import { actionCreators } from '../actions';
-import MainLayout from './Layout.jsx';
 
 import ConcertContainerMainBody from './ConcertContainerMainBody.jsx';
 import ConcertContainerMainTitle from './ConcertContainerMainTitle.jsx';
@@ -22,17 +21,15 @@ class ConcertContainer extends React.Component {
         console.log('Handle data call');
         this.props.dispatch({type : actionTypes.SHOW_DATA_MODAL, activeModal: section});
     }
-    // sectionSelect(e) {
-    //   e.event.target.id
-    //}
 
     render(){
-        var concert = this.props.concert;
         if (concert.error) {return (<p>Error</p>)}
         return (
-            <Loader loaded={concert.isLoaded}>
-                <ConcertContainerMainTitle concert={concert}/ >
-                <ConcertContainerMainBody concert={concert} />
+            <Loader loaded={!this.props.concertApiCall.loading}>
+                <ConcertContainerMainTitle title={this.props.title}/ >
+                <ConcertContainerMainBody mapBox={this.props.mapBox}
+                                          ticketsBox={this.props.ticketsBox}
+                                          socialMediaBox={this.props.socialMediaBox} />
             </Loader>
         )
     }
