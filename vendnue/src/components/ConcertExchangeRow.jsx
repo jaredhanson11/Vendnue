@@ -13,7 +13,7 @@ export default class ConcertExchangeRow extends React.Component{
                         <ConcertExchangeRowTicketPDF />
                     </Col>
                     <Col xs={2} style={jsCSS.ticketPrice} >
-                        <ConcertExchangeRowPrice />
+                        <ConcertExchangeRowPrice price={this.props.section_bid.bid_price_per_ticket} />
                     </Col>
                 </Row>
         )

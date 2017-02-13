@@ -76,7 +76,9 @@ export const concertExchangeSectionStyle = {
         }),
 
     ticketExchange: Object.assign({
+            overflow: 'scroll'
         },
+        fullHeight,
         devBorder('black')
     )
 };
