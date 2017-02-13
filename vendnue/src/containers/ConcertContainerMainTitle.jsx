@@ -6,7 +6,7 @@ import { concertContainerMainTitleStyle as jsCSS } from '../static/js/style.js';
 
 export default class ConcertContainerMainTitle extends React.Component {
     render() {
-        if (this.props.concert.payload.concert === undefined){return <div></div>}
+        if (this.props.title === undefined){return <div></div>}
         var artists = this.props.title.artistsPerforming.map(
             function(curr) {
                 const artistUrl = '/artists/' + curr.id;

@@ -1,16 +1,6 @@
 import Immutable from 'immutable';
 import { actionTypes } from '../actions';
 
-export {
-    concertApiCallReducer,
-    socialApiCallReducer,
-    navBarReducer,
-    titleReducer,
-    mapBoxReducer,
-    ticketsBoxReducer,
-    socialMediaBoxReducer
-}
-
 var concertApiCallReducer = function(state={}, action) {
     switch (action.type) {
         case actionTypes.GET_CONCERT_REQUEST:
@@ -99,7 +89,7 @@ var mapBoxReducer = function(state={}, action) {
             const concert = action.payload.concert;
             newState.map = {
                 sections: concert.map.sections,
-                activeSection = ''
+                activeSection: ''
             }
             newState.concertDataSummary = {
                 sectionBid: concert.section_bid_summary,
@@ -142,7 +132,7 @@ var ticketsBoxReducer = function(state={}, action) {
     }
 };
 
-var socialMediaBox = function(state={}, action) {
+var socialMediaBoxReducer = function(state={}, action) {
     switch(action.type) {
         case actionTypes.GET_CONCERT_SUCCESS:
             var newState = Immutable.fromJS(state);
@@ -155,4 +145,16 @@ var socialMediaBox = function(state={}, action) {
             newState = newState.toJS();
             return newState;
     }
+};
+
+export {
+    concertApiCallReducer,
+    socialApiCallReducer,
+    navBarReducer,
+    titleReducer,
+    mapBoxReducer,
+    ticketsBoxReducer,
+    socialMediaBoxReducer
 }
+
+

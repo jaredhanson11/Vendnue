@@ -18,6 +18,8 @@ class ConcertContainer extends React.Component {
     }
 
     selectSection(section) {
+        console.log('select section');
+        console.log(this.props);
         this.props.dispatch({type : actionTypes.SELECT_SECTION, section: section});
     }
 
@@ -28,7 +30,8 @@ class ConcertContainer extends React.Component {
                 <ConcertContainerMainTitle title={this.props.title.name}/ >
                 <ConcertContainerMainBody mapBox={this.props.mapBox}
                                           ticketsBox={this.props.ticketsBox}
-                                          socialMediaBox={this.props.socialMediaBox} />
+                                          socialMediaBox={this.props.socialMediaBox}
+                                          selectSection={this.selectSection} />
             </Loader>
         )
     }

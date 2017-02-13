@@ -16,11 +16,11 @@ export default class ConcertContainerMainBody extends React.Component{
             <div>
                 <Row style={jsCSS.mainRow} >
                     <Col xs={6} style={jsCSS.leftMainOuterDiv} >
-                        <ConcertMapSection map={this.props.mapBox.map} />
+                        <ConcertMapSection map={this.props.mapBox.map}  />
                         <SectionDataSection concertDataSummary={this.props.mapBox.concertDataSummary} />
                     </Col>
                     <Col xs={6} style={jsCSS.rightMainOuterDiv} >
-                        <ConcertExchangeSection ticketsExhcange={this.props.ticketsBox.ticketsExhcange />
+                        <ConcertExchangeSection ticketsExchange={this.props.ticketsBox.ticketsExchange} />
                     </Col>
                 </Row>
                 <Row style={jsCSS.footerOuterDiv} >
