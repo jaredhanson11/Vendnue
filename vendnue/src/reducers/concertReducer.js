@@ -99,13 +99,18 @@ var mapBoxReducer = function(state={}, action) {
             const concert = action.payload.concert;
             newState.map = {
                 sections: concert.map.sections,
-                actionSection = ''
+                activeSection = ''
             }
             newState.concertDataSummary = {
                 sectionBid: concert.section_bid_summary,
                 ticket: concert.ticket_summary,
                 soldTicket: concert.solid_ticket_summary
             }
+            return newState;
+        case actionTypes.SELECT_SECTION:
+            var newState = Immutable.fromJS(state);
+            newState = newState.toJS();
+            newState.map.activeSection = action.section;
             return newState;
         default:
             var newState = Immutable.fromJS(state);
@@ -124,6 +129,11 @@ var ticketsBoxReducer = function(state={}, action) {
                 sections: concert.map.sections,
                 activeSection: ''
             }
+            return newState;
+        case actionTypes.SELECT_SECTION:
+            var newState = Immutable.fromJS(state);
+            newState = newState.toJS();
+            newState.ticketExchange.activeSection = action.section;
             return newState;
         default:
             var newState = Immutable.fromJS(state);
