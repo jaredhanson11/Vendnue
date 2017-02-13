@@ -23,6 +23,7 @@ class User(db.Model):
     tickets = db.relationship('Ticket', backref='seller', lazy='dynamic')
     sold_tickets = db.relationship('Sold_Ticket', backref='seller', lazy='dynamic')
     section_bids = db.relationship('Section_Bid', backref='bidder', lazy='dynamic')
+    cleared_section_bids = db.relationship('Cleared_Section_Bid', backref='bidder', lazy='dynamic')
 
     ######################## Flask-Login #########################
     def is_authenticated(self):
