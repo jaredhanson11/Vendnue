@@ -94,7 +94,7 @@ var mapBoxReducer = function(state={}, action) {
             newState.concertDataSummary = {
                 sectionBid: concert.section_bid_summary,
                 ticket: concert.ticket_summary,
-                soldTicket: concert.solid_ticket_summary
+                soldTicket: concert.sold_ticket_summary
             }
             return newState;
         case actionTypes.SELECT_SECTION:

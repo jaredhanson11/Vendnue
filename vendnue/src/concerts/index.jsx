@@ -35,7 +35,29 @@ var initialState = {
             activeSection: '',
             sections: []
         },
-        concertDataSummary: {}
+        concertDataSummary: {
+            sectionBid: {
+                'volume_bids': 0,
+                'average_price': 0,
+                'hi_bid_price': 0,
+                'low_bid_price': 0,
+                'variance_price': 0
+            },
+            ticket: {
+                'volume_tickets': 0,
+                'average_ticket_price': 0,
+                'hi_ticket_price': 0,
+                'lo_ticket_price': 0,
+                'variance_ticket_price': 0
+            },
+            soldTicket: {
+                'volume_sold_tickets': 0,
+                'average_sold_ticket_price': 0,
+                'hi_sold_ticket_price': 0,
+                'lo_sold_ticket_price': 0,
+                'variance_sold_ticket_price': 0
+            }
+        }
     },
     ticketsBox: {
         ticketsExchange: {
