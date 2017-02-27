@@ -24,7 +24,7 @@ export default class ConcertContainerMainBody extends React.Component{
                     </Col>
                 </Row>
                 <Row style={jsCSS.footerOuterDiv} >
-                    <Col xs={12}>Twitter</Col>
+                    <Col xs={12}></Col>
                 </Row>
             </div>
         )
