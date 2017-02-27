@@ -75,7 +75,7 @@ export const concertExchangeSectionStyle = {
             marginTop: '10%'
         }),
 
-    ticketExchange: Object.assign({
+    ticketsExchange: Object.assign({
             overflow: 'scroll'
         },
         fullHeight,
@@ -84,16 +84,14 @@ export const concertExchangeSectionStyle = {
 };
 export const concertExchangeRowStyle = {
     mainRow: Object.assign({
-            height: '60%',
-        }),
-
-    linkToTicket: Object.assign({
+            height: '100px',
         },
-        fullHeight,
-        devBorder('black')
+        devBorder('orange')
     ),
 
     ticketPrice: Object.assign({
+            textAlign: 'center',
+            paddingTop: '35px'
         },
         fullHeight,
         devBorder('black')
@@ -107,3 +105,11 @@ export const concertExchangeRowPriceStyle = {
 };
 export const concertExchangeStyle = {
 };
+
+export const concertExchangeSectionRowStyle = {
+    mainRow: Object.assign({
+            height: '125px',
+        },
+        devBorder('green')
+    )
+}

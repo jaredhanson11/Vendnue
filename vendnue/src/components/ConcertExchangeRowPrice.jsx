@@ -6,7 +6,7 @@ export default class ConcertExchangeRowPrice extends React.Component{
     render() {
         return (
             <Row >
-                <Col xs={12} style={{height: '100%', border: 'solid thin blue'}} >
+                <Col xs={12} >
                     <p>{this.props.price}</p>
                 </Col>
             </Row>
