@@ -2,6 +2,7 @@
 import React from 'react';
 
 import {Row, Col, Tabs, Tab} from 'react-bootstrap';
+import {sectionDataSectionStyle as jsCSS} from '../static/js/style.js';
 
 export default class SectionDataSection extends React.Component{
     render(){
@@ -12,7 +13,7 @@ export default class SectionDataSection extends React.Component{
         // could be made more modular
         return (
                 <Row style={{marginTop: '3%', height:'75%'}} >
-                    <Col xsOffset={2} xs={8} style={{border: 'solid 1px blue'}} >
+                    <Col xsOffset={2} xs={8} style={jsCSS.mainCol} >
                     <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
                         <Tab eventKey={1} title="Bid">
                             <div>Volume: {(Math.round(sectionBidSummary['volume_bids']*100)/100).toFixed(2)}</div>

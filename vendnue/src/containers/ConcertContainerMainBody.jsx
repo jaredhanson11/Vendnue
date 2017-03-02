@@ -14,15 +14,15 @@ import { concertContainerMainBodyStyle as jsCSS } from '../static/js/style.js';
 export default class ConcertContainerMainBody extends React.Component{
     render(){
         return (
-            <div>
                 <Row style={jsCSS.mainRow} >
-                    <Col xs={6} style={jsCSS.leftMainOuterDiv} >
+                    <Col xs={4} style={jsCSS.mapBox} >
                         <ConcertMapSection map={this.props.mapBox.map} actions={this.props.actions} />
                         <SectionDataSection concertDataSummary={this.props.mapBox.concertDataSummary} />
                     </Col>
-                    <Col xs={6} style={jsCSS.rightMainOuterDiv} >
-                        <ConcertExchangeSection ticketsExchange={this.props.ticketsBox.ticketsExchange} />
+                    <Col xs={4} style={jsCSS.ticketsBox} >
+                        <ConcertExchangeSection ticketsExchange={this.props.ticketsBox.ticketsExchange} actions={this.props.actions} />
                     </Col>
+                    <Col xs={4} style={jsCSS.socialMediaBox}></Col>
                 </Row>
                 <Row style={jsCSS.footerOuterDiv} >
                     <Col xs={12}>
