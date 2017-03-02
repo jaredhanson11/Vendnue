@@ -113,3 +113,12 @@ export const concertExchangeSectionRowStyle = {
         devBorder('green')
     )
 }
+
+export const socialMediaPanelStyle = {
+    general: Object.assign({
+        height: '175px',
+        width: '175x',
+        },
+        devBorder('blue')
+    )
+}

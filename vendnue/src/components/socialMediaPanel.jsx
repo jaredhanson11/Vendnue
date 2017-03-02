@@ -5,16 +5,13 @@ import { Row, Col, Panel} from 'react-bootstrap';
 
 export default class SocialMediaPanel extends React.Component {
     render() {
+        // const tweetData = this.props.tweetData;
+        // const user = '@' + tweetData.user;
         return (
             <Row>
-            // created_at, media, id, text, user
-            // https://twitter.com/MITengineers/status/833548161306210305
-            //
-            const tweetData = this.props.tweetData;
-            const user = '@' + tweetData.user;
-            const 
                 <Col xs={6} style={styles.noGutters} >
-                    <Panel onClick={ handleClick }>
+                    <Panel style={styles.socialMediaPanelStyle.general}>
+                        Twitter
                     </Panel>
                 </Col>
             </Row>

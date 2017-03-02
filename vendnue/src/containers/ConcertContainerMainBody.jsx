@@ -7,6 +7,7 @@ import { actionCreators } from '../actions';
 import ConcertMapSection from '../components/ConcertMapSection.jsx';
 import SectionDataSection from '../components/SectionDataSection.jsx';
 import ConcertExchangeSection from '../components/ConcertExchangeSection.jsx';
+import SocialMediaPanel from '../components/SocialMediaPanel.jsx'; 
 
 import { concertContainerMainBodyStyle as jsCSS } from '../static/js/style.js';
 
@@ -24,7 +25,9 @@ export default class ConcertContainerMainBody extends React.Component{
                     </Col>
                 </Row>
                 <Row style={jsCSS.footerOuterDiv} >
-                    <Col xs={12}></Col>
+                    <Col xs={12}>
+                        <SocialMediaPanel />
+                    </Col>
                 </Row>
             </div>
         )
