@@ -18,7 +18,7 @@ class ConcertContainer extends React.Component {
     }
 
     selectSection(e) {
-        this.props.dispatch(actionCreators.selectSection(e.target.id));
+        this.props.dispatch(actionCreators.selectSection(e.currentTarget.id));
     }
 
     render(){
@@ -29,7 +29,7 @@ class ConcertContainer extends React.Component {
                 <ConcertContainerMainBody mapBox={this.props.mapBox}
                                           ticketsBox={this.props.ticketsBox}
                                           socialMediaBox={this.props.socialMediaBox}
-                                          actions={{'selectSection': this.selectSection.bind(this)}}/>
+                                          actions={{selectSection: this.selectSection.bind(this)}}/>
             </Loader>
         )
     }

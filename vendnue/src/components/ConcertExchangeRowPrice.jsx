@@ -7,7 +7,7 @@ export default class ConcertExchangeRowPrice extends React.Component{
         return (
             <Row >
                 <Col xs={12} >
-                    <p>{this.props.price}</p>
+                    ${this.props.price} /ticket
                 </Col>
             </Row>
         )

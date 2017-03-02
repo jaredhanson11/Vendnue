@@ -12,7 +12,7 @@ export default class ConcertExchangeSection extends React.Component{
             if (this.props.ticketsExchange.activeSection === section.id.toString()) {var isActive = true;}
             else {var isActive = false;}
             console.log(isActive);
-            sections.push((<ConcertExchangeSectionRow section={section} isActive={isActive} />));
+            sections.push((<ConcertExchangeSectionRow section={section} isActive={isActive} actions={this.props.actions} />));
         })
         return (
                 <Row style={jsCSS.mainRow} >
