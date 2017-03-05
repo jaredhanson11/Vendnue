@@ -14,6 +14,7 @@ import { concertContainerMainBodyStyle as jsCSS } from '../static/js/style.js';
 export default class ConcertContainerMainBody extends React.Component{
     render(){
         return (
+            <div>
                 <Row style={jsCSS.mainRow} >
                     <Col xs={4} style={jsCSS.mapBox} >
                         <ConcertMapSection map={this.props.mapBox.map} actions={this.props.actions} />
@@ -22,10 +23,7 @@ export default class ConcertContainerMainBody extends React.Component{
                     <Col xs={4} style={jsCSS.ticketsBox} >
                         <ConcertExchangeSection ticketsExchange={this.props.ticketsBox.ticketsExchange} actions={this.props.actions} />
                     </Col>
-                    <Col xs={4} style={jsCSS.socialMediaBox}></Col>
-                </Row>
-                <Row style={jsCSS.footerOuterDiv} >
-                    <Col xs={12}>
+                    <Col xs={4} style={jsCSS.socialMediaBox}>
                         <SocialMediaPanel />
                     </Col>
                 </Row>
