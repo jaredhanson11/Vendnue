@@ -32,7 +32,6 @@ var initialState = {
     },
     mapBox: {
         map: {
-            activeSection: '',
             sections: []
         },
         concertDataSummary: {

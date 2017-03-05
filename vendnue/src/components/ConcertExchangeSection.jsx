@@ -8,18 +8,15 @@ import ConcertExchangeSectionRow from './ConcertExchangeSectionRow.jsx';
 export default class ConcertExchangeSection extends React.Component{
     render(){
         var sections = [];
+        var k = 0;
         this.props.ticketsExchange.sections.map((section) => {
-            if (this.props.ticketsExchange.activeSection === section.id.toString()) {var isActive = true;}
-            else {var isActive = false;}
-            console.log(isActive);
-            sections.push((<ConcertExchangeSectionRow section={section} isActive={isActive} actions={this.props.actions} />));
+            sections.push((<ConcertExchangeSectionRow section={section} actions={this.props.actions} key={k} />));
+            k += 1;
         })
         return (
-                <Row style={jsCSS.mainRow} >
-                    <Col xsOffset={2} xs={8} style={jsCSS.ticketsExchange} >
-                        {sections}
-                    </Col>
-                </Row>
+                <Col xs={12} style={jsCSS.ticketsExchange} >
+                    {sections}
+                </Col>
         )
     }
 }

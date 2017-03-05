@@ -1,5 +1,13 @@
+const navbarHeightPx = 52;
+const concertTitleHeightPx = 100;
+
+
 export const fullHeight = {
     height: '100%'
+};
+
+const clickable = {
+    cursor: 'pointer'
 };
 
 export const vcenter = {
@@ -25,7 +33,13 @@ const shadowBorder = {
 
 export const concertContainerMainBodyStyle = {
     mainRow: Object.assign({
-            height: '75%'
+            top: concertTitleHeightPx.toString() + 'px',
+            left: '0',
+            right: '0',
+            bottom: '0',
+            position: 'absolute',
+            width: 'auto',
+            height: 'auto',
         },
         shadowBorder
     ),
@@ -51,9 +65,21 @@ export const concertContainerMainBodyStyle = {
         shadowBorder
     )
 };
+export const concertContainerStyle = {
+    mainContainer: Object.assign({
+        top: navbarHeightPx.toString() + 'px',
+        left: '0',
+        right: '0',
+        bottom: '0',
+        position: 'absolute',
+        width: 'auto',
+        height: 'auto',
+        overflow: 'hidden'
+    })
+}
 export const concertContainerMainTitleStyle = {
     mainRow: Object.assign({
-            height: '100px'
+            height: concertTitleHeightPx.toString() + 'px'
         }),
 
     mainCol: Object.assign({
@@ -91,19 +117,22 @@ export const concertExchangeSectionStyle = {
     mainRow: Object.assign({
             height: '90%',
             marginTop: '5%'
-        }),
+        },
+        ),
 
     ticketsExchange: Object.assign({
             overflow: 'scroll'
         },
         fullHeight,
-        shadowBorder
+        shadowBorder,
+        noGutters
     )
 };
 export const concertExchangeRowStyle = {
     mainRow: Object.assign({
             height: '100px',
         },
+        shadowBorder,
     ),
 
     ticketPrice: Object.assign({
@@ -119,34 +148,13 @@ export const concertExchangeRowPriceStyle = {
         fullHeight
         ),
 };
-export const concertExchangeRowHeadersStyle = {
-    mainRow: Object.assign({
-        },
-    ),
-    priceHeader: Object.assign({
-            textAlign: 'center',
-        },
-    )
-
-};
-
-export const concertExchangeSectionRowHeadersStyle = {
-    mainRow: Object.assign({
-        },
-    ),
-    sectionHeader: Object.assign({
-            textAlign: 'center',
-        },
-        shadowBorder
-    )
-
-};
 
 export const concertExchangeSectionRowStyle = {
     mainRow: Object.assign({
             height: '125px'
         },
-        shadowBorder
+        shadowBorder,
+        clickable
     ),
     sectionName: Object.assign({
             textAlign: 'center',
@@ -158,8 +166,7 @@ export const concertExchangeSectionRowStyle = {
         }
     ),
     sectionTicketRows: Object.assign({
-            marginLeft: '10px',
-            marginRight: '10px'
+            borderLeft: '10px solid red'
         },
         shadowBorder
     ),

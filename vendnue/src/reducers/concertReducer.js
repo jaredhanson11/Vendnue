@@ -87,20 +87,28 @@ var mapBoxReducer = function(state={}, action) {
             var newState = Immutable.fromJS(state);
             newState = newState.toJS();
             const concert = action.payload.concert;
+            const concertSections = concert.map.sections.map((currSection) => {
+                currSection.isActive = false;
+                return currSection;
+            });
             newState.map = {
-                sections: concert.map.sections,
-                activeSection: ''
-            }
+                sections: concertSections,
+            };
             newState.concertDataSummary = {
                 sectionBid: concert.section_bid_summary,
                 ticket: concert.ticket_summary,
                 soldTicket: concert.sold_ticket_summary
-            }
+            };
             return newState;
-        case actionTypes.SELECT_SECTION:
+        case actionTypes.TOGGLE_SECTION:
             var newState = Immutable.fromJS(state);
             newState = newState.toJS();
-            newState.map['activeSection'] = action.section;
+            newState.map.sections = newState['map']['sections'].map((currSection)=>{
+                if (currSection['id'] == action.section){
+                    currSection.isActive = !currSection['isActive'];
+                }
+                return currSection;
+            })
             return newState;
         default:
             var newState = Immutable.fromJS(state);
@@ -115,15 +123,24 @@ var ticketsBoxReducer = function(state={}, action) {
             var newState = Immutable.fromJS(state);
             newState = newState.toJS();
             const concert = action.payload.concert;
+            const concertSections = concert.map.sections.map((currSection) => {
+                currSection.isActive = false;
+                return currSection;
+            });
+
             newState.ticketsExchange = {
-                sections: concert.map.sections,
-                activeSection: ''
+                sections: concertSections,
             }
             return newState;
-        case actionTypes.SELECT_SECTION:
+        case actionTypes.TOGGLE_SECTION:
             var newState = Immutable.fromJS(state);
             newState = newState.toJS();
-            newState['ticketsExchange']['activeSection'] = action.section;
+            newState['ticketsExchange'].sections = newState['ticketsExchange']['sections'].map((currSection)=>{
+                if (currSection['id'] == action.section){
+                    currSection['isActive'] = !currSection['isActive'];
+                }
+                return currSection;
+            })
             return newState;
         default:
             var newState = Immutable.fromJS(state);

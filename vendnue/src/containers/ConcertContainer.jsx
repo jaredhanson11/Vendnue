@@ -2,8 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
 import Loader from 'react-loader';
+import { Grid } from 'react-bootstrap';
 
 import { actionCreators } from '../actions';
+
+import { concertContainerStyle as jsCSS } from '../static/js/style.js';
 
 import ConcertContainerMainBody from './ConcertContainerMainBody.jsx';
 import ConcertContainerMainTitle from './ConcertContainerMainTitle.jsx';
@@ -17,20 +20,22 @@ class ConcertContainer extends React.Component {
         this.props.dispatch(actionCreators.getConcert(concertID));
     }
 
-    selectSection(e) {
-        this.props.dispatch(actionCreators.selectSection(e.currentTarget.id));
+    toggleSection(e) {
+        this.props.dispatch(actionCreators.toggleSection(e.currentTarget.id));
     }
 
     render(){
         if (this.props.concertApiCall.error) {return (<p>Error</p>)}
         return (
-            <Loader loaded={!this.props.concertApiCall.loading}>
-                <ConcertContainerMainTitle title={this.props.title} />
-                <ConcertContainerMainBody mapBox={this.props.mapBox}
-                                          ticketsBox={this.props.ticketsBox}
-                                          socialMediaBox={this.props.socialMediaBox}
-                                          actions={{selectSection: this.selectSection.bind(this)}}/>
-            </Loader>
+            <Grid style={jsCSS.mainContainer}>
+                <Loader loaded={!this.props.concertApiCall.loading} >
+                    <ConcertContainerMainTitle title={this.props.title} />
+                    <ConcertContainerMainBody mapBox={this.props.mapBox}
+                                              ticketsBox={this.props.ticketsBox}
+                                              socialMediaBox={this.props.socialMediaBox}
+                                              actions={{toggleSection: this.toggleSection.bind(this)}}/>
+                </Loader>
+            </Grid>
         )
     }
 

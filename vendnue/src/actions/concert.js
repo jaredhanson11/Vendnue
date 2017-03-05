@@ -10,7 +10,7 @@ const GET_SOCIAL_REQUEST = 'GET_SOCIAL_REQUEST';
 const GET_SOCIAL_SUCCESS = 'GET_SOCIAL_SUCCESS';
 const GET_SOCIAL_FAILURE = 'GET_SOCIAL_FAILURE';
 
-const SELECT_SECTION = 'SELECT_SECTION';
+const TOGGLE_SECTION = 'TOGGLE_SECTION';
 
 
 var actionTypes = {
@@ -20,13 +20,12 @@ var actionTypes = {
     GET_SOCIAL_REQUEST,
     GET_SOCIAL_SUCCESS,
     GET_SOCIAL_FAILURE,
-    SELECT_SECTION
+    TOGGLE_SECTION
 }
 
 function getConcert(concertID) {
 
     const url = 'http://127.0.0.1:5000/concerts/' + concertID;
-    console.log(url);
 
     return {
         [CALL_API] : {
@@ -38,15 +37,15 @@ function getConcert(concertID) {
     }
 }
 
-function selectSection(sectionId) {
+function toggleSection(sectionId) {
     return {
-        type: SELECT_SECTION,
+        type: TOGGLE_SECTION,
         section: sectionId
     }
 }
 
 var concertActionCreators = {
-    selectSection,
+    toggleSection,
     getConcert
 }
 

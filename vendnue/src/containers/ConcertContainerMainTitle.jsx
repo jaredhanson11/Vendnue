@@ -6,11 +6,13 @@ import { concertContainerMainTitleStyle as jsCSS } from '../static/js/style.js';
 export default class ConcertContainerMainTitle extends React.Component {
     render() {
         if (this.props.title === undefined){return <div></div>}
+        var k = 0;
         var artists = this.props.title.artistsPerforming.map(
             function(curr) {
                 const artistUrl = '/artists/' + curr.id;
+                k += 1;
                 return(
-                    <li style={jsCSS.artistName}><a href={artistUrl} >{curr.name}</a></li>
+                    <li style={jsCSS.artistName} key={k} ><a href={artistUrl} >{curr.name}</a></li>
                 )
             });
         Date.prototype.getDayOfWeek = function(){
