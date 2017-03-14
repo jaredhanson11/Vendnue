@@ -10,7 +10,8 @@ const GET_SOCIAL_REQUEST = 'GET_SOCIAL_REQUEST';
 const GET_SOCIAL_SUCCESS = 'GET_SOCIAL_SUCCESS';
 const GET_SOCIAL_FAILURE = 'GET_SOCIAL_FAILURE';
 
-const TOGGLE_SECTION = 'TOGGLE_SECTION';
+const TOGGLE_ACTIVE_SECTION = 'TOGGLE_ACTIVE_SECTION';
+const TOGGLE_HOVER_SECTION = 'HOVER_SECTION';
 
 
 var actionTypes = {
@@ -20,7 +21,8 @@ var actionTypes = {
     GET_SOCIAL_REQUEST,
     GET_SOCIAL_SUCCESS,
     GET_SOCIAL_FAILURE,
-    TOGGLE_SECTION
+    TOGGLE_ACTIVE_SECTION,
+    TOGGLE_HOVER_SECTION
 }
 
 function getConcert(concertID) {
@@ -39,13 +41,21 @@ function getConcert(concertID) {
 
 function toggleSection(sectionId) {
     return {
-        type: TOGGLE_SECTION,
+        type: TOGGLE_ACTIVE_SECTION,
+        section: sectionId
+    }
+}
+
+function toggleHoverSection(sectionId) {
+    return {
+        type: TOGGLE_HOVER_SECTION,
         section: sectionId
     }
 }
 
 var concertActionCreators = {
     toggleSection,
+    toggleHoverSection,
     getConcert
 }
 

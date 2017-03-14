@@ -93,7 +93,8 @@ export const concertContainerMainTitleStyle = {
         }),
 
     date: Object.assign({
-            'float': 'right'
+            'float': 'right',
+            marginTop: '35px'
         }),
 
     artistList: Object.assign({
@@ -173,7 +174,10 @@ export const concertExchangeSectionRowStyle = {
     activeSection: Object.assign({
             background: 'none repeat scroll 0 0 #FFCF8B'
         }
-    )
+    ),
+    hoveredSection: Object.assign({
+        background: 'none repeat scroll 0 0 #FFCF8B'
+    })
 }
 
 export const socialMediaPanelStyle = {

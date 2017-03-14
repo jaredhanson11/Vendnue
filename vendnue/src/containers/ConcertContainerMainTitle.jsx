@@ -45,9 +45,8 @@ export default class ConcertContainerMainTitle extends React.Component {
         return (
             <Row style={jsCSS.mainRow} >
                 <Col xs={12} style={jsCSS.mainCol}>
-                <div style={jsCSS.name}> {this.props.title.concertName}</div>
-                <div style={jsCSS.date}>{dateStringWithTime}</div>
-                <div style={jsCSS.artistList}><ul className="list-unstyled">{artists}</ul></div>
+                <h2 style={jsCSS.name}> {this.props.title.concertName}<small style={jsCSS.artistList}><ul className="list-unstyled">{artists}</ul></small></h2>
+                <p style={jsCSS.date}>{dateStringWithTime}</p>
                 </Col>
             </Row>
         )

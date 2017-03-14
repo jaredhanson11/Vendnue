@@ -100,7 +100,7 @@ var mapBoxReducer = function(state={}, action) {
                 soldTicket: concert.sold_ticket_summary
             };
             return newState;
-        case actionTypes.TOGGLE_SECTION:
+        case actionTypes.TOGGLE_ACTIVE_SECTION:
             var newState = Immutable.fromJS(state);
             newState = newState.toJS();
             newState.map.sections = newState['map']['sections'].map((currSection)=>{
@@ -132,12 +132,22 @@ var ticketsBoxReducer = function(state={}, action) {
                 sections: concertSections,
             }
             return newState;
-        case actionTypes.TOGGLE_SECTION:
+        case actionTypes.TOGGLE_ACTIVE_SECTION:
             var newState = Immutable.fromJS(state);
             newState = newState.toJS();
             newState['ticketsExchange'].sections = newState['ticketsExchange']['sections'].map((currSection)=>{
                 if (currSection['id'] == action.section){
                     currSection['isActive'] = !currSection['isActive'];
+                }
+                return currSection;
+            })
+            return newState;
+        case actionTypes.TOGGLE_HOVER_SECTION:
+            var newState = Immutable.fromJS(state);
+            newState = newState.toJS();
+            newState['ticketsExchange'].sections = newState['ticketsExchange']['sections'].map((currSection)=>{
+                if (currSection['id'] == action.section){
+                    currSection['isHovered'] = !currSection['isHovered'];
                 }
                 return currSection;
             })

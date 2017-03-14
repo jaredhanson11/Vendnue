@@ -18,11 +18,15 @@ class ConcertContainer extends React.Component {
         const url = window.location.href;
         const concertID = url.split('/').pop();
         this.props.dispatch(actionCreators.getConcert(concertID));
-    }
+    };
 
     toggleSection(e) {
         this.props.dispatch(actionCreators.toggleSection(e.currentTarget.id));
-    }
+    };
+
+    toggleHoverSection(e) {
+        this.props.dispatch(actionCreators.toggleHoverSection(e.currentTarget.id));
+    };
 
     render(){
         if (this.props.concertApiCall.error) {return (<p>Error</p>)}
@@ -33,7 +37,7 @@ class ConcertContainer extends React.Component {
                     <ConcertContainerMainBody mapBox={this.props.mapBox}
                                               ticketsBox={this.props.ticketsBox}
                                               socialMediaBox={this.props.socialMediaBox}
-                                              actions={{toggleSection: this.toggleSection.bind(this)}}/>
+                                              actions={{toggleSection: this.toggleSection.bind(this), toggleHoverSection: this.toggleHoverSection.bind(this)}}/>
                 </Loader>
             </Grid>
         )

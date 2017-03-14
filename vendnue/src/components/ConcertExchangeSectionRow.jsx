@@ -13,12 +13,15 @@ export default class ConcertExchangeSectionRow extends React.Component{
             k += 1;
         });
 
-        if (this.props.section.isActive) {var mainRowStyle = Object.assign({}, jsCSS.mainRow, jsCSS.activeSection);}
-        else {var mainRowStyle = jsCSS.mainRow;}
+        var mainRowStyle = Object.assign({}, jsCSS.mainRow);
+
+        if (this.props.section.isActive) {mainRowStyle = Object.assign(mainRowStyle, jsCSS.activeSection);}
+        else if (this.props.section.isHovered) {mainRowStyle = Object.assign(mainRowStyle, jsCSS.hoveredSection);}
 
         return (
                 <div>
-                    <Col style={mainRowStyle} id={this.props.section.id} onClick={this.props.actions.toggleSection} >
+                    <Col style={mainRowStyle} id={this.props.section.id}
+                        onClick={this.props.actions.toggleSection} onMouseEnter={this.props.actions.toggleHoverSection} onMouseLeave={this.props.actions.toggleHoverSection} >
                             <Col xs={4} style={jsCSS.sectionName} >
                                 Section: <strong>{this.props.section.name}</strong>
                             </Col>
