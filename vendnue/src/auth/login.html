@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vendnue</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="auth-container">
+            <div class="auth-inputs">
+                <input class="input" id='username' name='username' placeholder='Email' />
+                <input class="input" id='password' name='password' placeholder='Password' type='password' />
+                <input type="submit" value="Sign In" class="auth-button" id="login-button">
+            <p>Don't have an account?<a href="./signup.html">Sign Up</a></p>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+const API_URL = 'http://127.0.0.1:5000';
+$('#login-button').on('click', function(){
+    $.ajax({
+        url: API_URL + '/auth/login',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({'email': $('#username').val(), 'password': $('#password').val()}),
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        success: function(res){
+            alert('success');
+            location.href = '../concerts/1'
+        },
+        error: function(xhr){
+            alert('there was an error signing in');
+            console.log(xhr);
+        },
+    });
+})
+    </script>
+<html>
