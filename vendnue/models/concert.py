@@ -71,10 +71,6 @@ class Concert(db.Model):
                 'id': self.id,
                 'name': self.name,
                 'date': self.date.isoformat(),
-                'section_bid_summary' : self.get_section_bid_summary(),
-                'cleared_section_bid_summary' : self.get_cleared_section_bid_summary(),
-                'ticket_summary' : self.get_ticket_summary(),
-                'sold_ticket_summary' : self.get_sold_ticket_summary()
             }
 
         if verbose:
@@ -85,7 +81,11 @@ class Concert(db.Model):
                     'sold_tickets': map(lambda sold_ticket_obj: sold_ticket_obj.get_json(verbose=True), self.sold_tickets),
                     'tickets': map(lambda ticket_obj: ticket_obj.get_json(verbose=True), self.tickets),
                     'section_bids': map(lambda section_bid_obj: section_bid_obj.get_json(verbose=True), self.section_bids),
-                    'cleared_section_bids': map(lambda cleared_section_bid_obj: cleared_section_bid_obj.get_json(verbose=True), self.cleared_section_bids)
+                    'cleared_section_bids': map(lambda cleared_section_bid_obj: cleared_section_bid_obj.get_json(verbose=True), self.cleared_section_bids),
+                    'section_bid_summary' : self.get_section_bid_summary(),
+                    'cleared_section_bid_summary' : self.get_cleared_section_bid_summary(),
+                    'ticket_summary' : self.get_ticket_summary(),
+                    'sold_ticket_summary' : self.get_sold_ticket_summary()
                 })
         ret = concert_json
 
