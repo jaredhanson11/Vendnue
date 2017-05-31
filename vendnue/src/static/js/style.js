@@ -195,3 +195,30 @@ export const sectionDataSectionStyle = {
         shadowBorder
     )
 };
+
+export const sellContainerMainBodyStyle = {
+    mainRow: Object.assign({
+            top: navbarHeightPx.toString() + 'px',
+            left: '0',
+            right: '0',
+            bottom: '0',
+            position: 'absolute',
+            width: 'auto',
+            height: 'auto',
+        },
+        shadowBorder
+    )
+}
+
+export const sellContainerStyle = {
+    mainContainer: Object.assign({
+        top: '0',
+        left: '0',
+        right: '0',
+        bottom: '0',
+        position: 'absolute',
+        width: 'auto',
+        height: 'auto',
+        overflow: 'hidden'
+    })
+}
