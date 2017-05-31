@@ -6,19 +6,21 @@ import { Grid } from 'react-bootstrap';
 
 import { actionCreators } from '../actions';
 
-// import { concertContainerStyle as jsCSS } from '../static/js/style.js';
+import { sellContainerStyle as jsCSS } from '../static/js/style.js';
 
 import SellContainerMainBody from './SellContainerMainBody.jsx';
 
 class SellContainer extends React.Component {
 
-    componentWillMount() {
+    // componentWillMount() {
 
-    }
+    // }
 
     render(){
         return (
-            <SellContainerMainBody />
+           <Grid style={jsCSS.mainContainer}>
+                <SellContainerMainBody />
+           </Grid>
         )
     }
 

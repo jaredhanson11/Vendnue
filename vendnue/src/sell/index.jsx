@@ -9,7 +9,7 @@ import SellContainer from './SellContainer.jsx';
 import Navbar from '../components/VendnueNavbar.jsx';
 
 var initialState = {
-
+	concertPrefix: '',
 }
 
 var store = configureStore(initialState);
