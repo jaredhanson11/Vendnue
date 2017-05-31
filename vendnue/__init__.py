@@ -5,7 +5,7 @@ from flask_login import LoginManager
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://hansonj:password@sql.mit.edu/hansonj+vendnue'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
