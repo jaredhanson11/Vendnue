@@ -7,8 +7,12 @@ import {
     titleReducer,
     mapBoxReducer,
     ticketsBoxReducer,
-    socialMediaBoxReducer
+    socialMediaBoxReducer,
 } from './concertReducer.js';
+
+import {
+    concertsApiCallReducer,
+} from './sellReducer.js';
 
 import { reducer as formReducer } from 'redux-form';
 
@@ -20,7 +24,8 @@ const rootReducer = combineReducers({
     mapBox: mapBoxReducer,
     ticketsBox: ticketsBoxReducer,
     socialMediaBox: socialMediaBoxReducer,
-    form: formReducer
+    form: formReducer,
+    concertQueryApiCall: concertsApiCallReducer,
 });
 
 export { rootReducer };
