@@ -12,6 +12,8 @@ import {
 
 import {
     concertsApiCallReducer,
+    concertQueryReducer,
+    concertInfoApiCallReducer
 } from './sellReducer.js';
 
 import { reducer as formReducer } from 'redux-form';
@@ -26,6 +28,8 @@ const rootReducer = combineReducers({
     socialMediaBox: socialMediaBoxReducer,
     form: formReducer,
     concertQueryApiCall: concertsApiCallReducer,
+    concertQuery: concertQueryReducer,
+    concertInfoApiCall: concertInfoApiCallReducer,
 });
 
 export { rootReducer };
