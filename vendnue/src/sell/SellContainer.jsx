@@ -12,14 +12,28 @@ import SellContainerMainBody from './SellContainerMainBody.jsx';
 
 class SellContainer extends React.Component {
 
-    // componentWillMount() {
+    componentWillMount() {
+        this.props.dispatch(actionCreators.getConcerts());
+    }
 
-    // }
+    getConcertInfo(id) {
+        this.props.dispatch(actionCreators.getConcertInfo(id));
+    }
+
+    enterQuery(query) {
+        this.props.dispatch(actionCreators.concertQuery(query));
+    };
+
+    selectQuery() {
+        this.props.dispatch(actionCreators.selectQuery());
+    }
 
     render(){
         return (
            <Grid style={jsCSS.mainContainer}>
-                <SellContainerMainBody />
+                <SellContainerMainBody concertQueryApiCall={this.props.concertQueryApiCall} enterQuery={this.enterQuery.bind(this)} 
+                concertQuery={this.props.concertQuery} getConcertInfo={this.getConcertInfo.bind(this)} selectQuery={this.selectQuery.bind(this)} 
+                concertInfoApiCall={this.props.concertInfoApiCall}/>
            </Grid>
         )
     }
@@ -28,7 +42,7 @@ class SellContainer extends React.Component {
 
 var mapStateToProps = function(state) {
     var immutableState = Immutable.fromJS(state);
-    var newState = immutableState.toJS()
+    var newState = immutableState.toJS();
     return newState
 }
 
