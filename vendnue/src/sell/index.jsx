@@ -6,10 +6,45 @@ import { applyMiddleware, createStore } from 'redux';
 import { configureStore } from '../store.js';
 import SellContainer from './SellContainer.jsx';
 
-import Navbar from '../components/VendnueNavbar.jsx';
+import VendnueNavBar from '../components/VendnueNavbar.jsx';
 
 var initialState = {
-	concertPrefix: '',
+	concertQueryApiCall: {
+        loading: false,
+        loaded: false,
+        error: false,
+        errorMessage: '',
+		concerts : [],
+	},
+	concertQuery: {
+		prefix: '',
+		selected: false,
+	},
+	concertInfoApiCall: {
+		loading: true,
+        loaded: false,
+        error: false,
+        errorMessage: '',
+        concert: {
+        	name: '',
+        	date: '',
+        	section_bid_summary: {
+        		average_price: 0,
+        	},
+        	cleared_section_bid_summary: {
+        		average_price: 0,
+        	},
+        	ticket_summary: {
+        		average_ticket_price: 0,
+        	},
+        	sold_ticket_summary: {
+        		average_sold_ticket_price: 0,
+        	},
+        	map: {
+        		sections: [{name:''}]
+        	}
+        },
+	}
 }
 
 var store = configureStore(initialState);
@@ -17,8 +52,8 @@ var store = configureStore(initialState);
 ReactDOM.render(
     <Provider store={store}>
     <div>
-    <Navbar />
-    <SellContainer />
+        <VendnueNavBar />
+        <SellContainer  />
     </div>
     </Provider>
     ,document.getElementById('main'));
