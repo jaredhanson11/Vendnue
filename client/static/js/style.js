@@ -219,6 +219,17 @@ export const sellContainerMainBodyStyle = {
         },
         shadowBorder
     ),
+    mainRow2: Object.assign({
+            top: (3*navbarHeightPx).toString() + 'px',
+            left: '0',
+            right: '0',
+            bottom: '0',
+            position: 'absolute',
+            width: 'auto',
+            height: 'auto',
+        },
+        shadowBorder
+    ),
 }
 
 export const sellContainerStyle = {
