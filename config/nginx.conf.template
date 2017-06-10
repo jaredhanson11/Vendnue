@@ -16,22 +16,33 @@ http {
     server {
         # You would want to make a separate file with its own server block for each virtual domain
         # on your server and then include them.
-        listen       80;
-        server_name  0.0.0.0;
+        listen       8080;
+        server_name  127.0.0.1;
+
+        location = /sell/ {
+            root <path-to-vendnue>/Vendnue/client;
+            index index.html;
+        }
 
         location = /concerts/ {
-            root /Users/jaclarke/Desktop/vendnue/Vendnue/vendnue/src;
+            root <path-to-vendnue>/Vendnue/client;
             index index.html;
         }
 
         location ~ ^/concerts/([0-9]+) {
             rewrite ^/.* /concerts/;
-            root /Users/jaclarke/Documents/shared-files/test;
+            root <path-to-vendnue>/Vendnue/client;
+            index index.html;
+        }
+
+        location ~ ^/artists/([0-9]+) {
+            rewrite ^/.* /artists/;
+            root <path-to-vendnue>/Vendnue/client;
             index index.html;
         }
 
         location / {
-            root   /Users/jaclarke/Desktop/vendnue/Vendnue/vendnue/src;
+            root <path-to-vendnue>/Vendnue/client;
             index  index.html;
         }
 

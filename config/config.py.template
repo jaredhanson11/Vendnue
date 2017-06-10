@@ -1,0 +1,4 @@
+# SQLAlchemy Config
+SQLALCHEMY_DATABASE_URI = 'mysql://hansonj:password@sql.mit.edu/hansonj+vendnue'
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+SESSION_SECRET_KEY = 'vCasCy0yNdHxBTT30JHOEfqvqUaKOn9ulvaS3EssEKhVm8eZMgsaWlm'

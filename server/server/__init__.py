@@ -6,11 +6,8 @@ from flask_cors import CORS, cross_origin
 from flask_migrate import Migrate
 
 app = Flask(__name__)
+app.config.from_object('config')
 CORS(app, supports_credentials=True)
-app.config['CORS_HEADERS'] = 'Content-Type'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://hansonj:password@sql.mit.edu/hansonj+vendnue'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'vCasCy0yNdHxvTT30IHOEfqvbUaKON9ulvaS3EssxKhVm8deZMgsaWlmcyQKO1Qn5cy2Z'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login_manager = LoginManager(app)
