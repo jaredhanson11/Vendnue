@@ -6,3 +6,4 @@ venv
 *.bundle.js
 *.sh
 *config.py
+*migrations
