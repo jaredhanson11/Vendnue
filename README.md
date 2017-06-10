@@ -41,6 +41,12 @@ $ python
 >>> db.create_all()
 >>> exit()
 ```
+5. Install React dependencies and build your bundles
+```bash
+$ cd Vendnue/client/
+$ npm install
+$ webpack
+```
 
 ## Running Vendnue Locally
 
