@@ -12,6 +12,10 @@ const GET_CONCERT_INFO_FAILURE = 'GET_CONCERT_INFO_FAILURE';
 const ENTER_SEARCH_QUERY = 'ENTER_SEARCH_QUERY';
 const SEARCH_QUERY_SELECTED = 'SEARCH_QUERY_SELECTED';
 
+const POST_CONCERT_TICKETS_REQUEST = 'POST_CONCERT_TICKETS_REQUEST';
+const POST_CONCERT_TICKETS_SUCCESS = 'POST_CONCERT_TICKETS_SUCCESS';
+const POST_CONCERT_TICKETS_FAILURE= 'POST_CONCERT_TICKETS_FAILURE';
+
 var actionTypes = {
     GET_CONCERT_SEARCH_REQUEST,
     GET_CONCERT_SEARCH_SUCCESS,
@@ -20,12 +24,17 @@ var actionTypes = {
     GET_CONCERT_INFO_REQUEST,
     GET_CONCERT_INFO_SUCCESS,
     GET_CONCERT_INFO_FAILURE,
-    SEARCH_QUERY_SELECTED
+    SEARCH_QUERY_SELECTED,
+    POST_CONCERT_TICKETS_REQUEST,
+    POST_CONCERT_TICKETS_SUCCESS,
+    POST_CONCERT_TICKETS_FAILURE
 }
+
+const API_URL = "http://127.0.0.1:8080/api/"
 
 function getConcerts() {
 
-    const url = "http://127.0.0.1:5000/search/bar?query="
+    const url = API_URL+"search/bar?query="
 
     return {
         [CALL_API] : {
@@ -38,13 +47,30 @@ function getConcerts() {
 
 function getConcertInfo(id) {
 
-    const url = "http://127.0.0.1:5000/concerts/" + String(id);
+    const url = API_URL+"concerts/" + String(id);
 
     return {
         [CALL_API] : {
             method: 'get',
             endpoint: url,
             types: [GET_CONCERT_INFO_REQUEST, GET_CONCERT_INFO_SUCCESS, GET_CONCERT_INFO_FAILURE]
+        }
+    }
+}
+
+function postConcertTickets(concertId, sectionId, numberOfTickets, priceOfTickets) {
+
+    const url = API_URL+"concerts/"+String(concertId)+"/sections/"+String(sectionId)+"/tickets/"
+    console.log(url);
+    return {
+        [CALL_API] : {
+            method: 'post',
+            endpoint: url,
+            data: {
+                price_per_ticket:priceOfTickets,
+                num_tickets:numberOfTickets
+            },
+            types: [GET_CONCERT_SEARCH_REQUEST, GET_CONCERT_SEARCH_SUCCESS, GET_CONCERT_SEARCH_FAILURE],
         }
     }
 }
@@ -67,7 +93,8 @@ var sellActionCreators = {
     concertQuery,
     actionTypes,
     getConcertInfo,
-    selectQuery
+    selectQuery,
+    postConcertTickets
 }
 
 export { sellActionCreators, actionTypes };
