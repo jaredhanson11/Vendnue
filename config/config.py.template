@@ -9,3 +9,10 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 SESSION_SECRET_KEY = 'vCasCy0yNdHxBTT30JHOEfqvqUaKOn9ulvaS3EssEKhVm8eZMgsaWlm'
 
 ######## End SQLAlchemy Config ########
+
+######## File Uploading Config #########
+
+# uploading tickets
+TICKETS_UPLOAD_FOLDER = './tmp/uploaded_tickets/'
+
+######## File Uploading Config #########
