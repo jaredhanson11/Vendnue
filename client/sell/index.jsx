@@ -51,7 +51,6 @@ var initialState = {
         loaded: false,
         error: false,
         errorMessage: '',
-        successMessage: '',
     }
 }
 
