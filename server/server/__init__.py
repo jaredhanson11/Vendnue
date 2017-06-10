@@ -9,6 +9,8 @@ app = Flask(__name__)
 app.config.from_object('config')
 CORS(app, supports_credentials=True)
 db = SQLAlchemy(app)
+app.secret_key = app.config['SESSION_SECRET_KEY']
+
 migrate = Migrate(app, db)
 login_manager = LoginManager(app)
 api = Api(app)
