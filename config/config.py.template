@@ -1,4 +1,11 @@
-# SQLAlchemy Config
+######## SQLAlchemy Config ########
+#
+# Shared MySQL dev database on .mit.edu
 SQLALCHEMY_DATABASE_URI = 'mysql://hansonj:password@sql.mit.edu/hansonj+vendnue'
+# Unccoment and change for development sqlite database
+# SQLALCHEMY_DATABASE_URI = 'sqlite:///<path-to-Vendnue-repo>/Vednue/server/vendnue_database.db'
+
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 SESSION_SECRET_KEY = 'vCasCy0yNdHxBTT30JHOEfqvqUaKOn9ulvaS3EssEKhVm8eZMgsaWlm'
+
+######## End SQLAlchemy Config ########
