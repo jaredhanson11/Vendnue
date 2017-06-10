@@ -5,6 +5,8 @@ from flask_login import LoginManager
 from flask_cors import CORS, cross_origin
 from flask_migrate import Migrate
 
+# for uploading tickets
+
 app = Flask(__name__)
 app.config.from_object('config')
 CORS(app, supports_credentials=True)

@@ -2,6 +2,14 @@ from flask_restful import Resource, request
 from flask_login import login_required, current_user
 from ..models import ticket, section, concert
 from ..utils import *
+from .. import app
+import os
+
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 class Tickets(Resource):
     '''
@@ -57,7 +65,7 @@ class Tickets(Resource):
             return responses.success(ret, 200)
 
     def post(self, concert_id, section_id):
-        '''
+        ''' 
         POST `/concerts/<int:concert_id>/sections/<int:section_id>/tickets/`
             body:
                 price_per_ticket: float
@@ -72,6 +80,7 @@ class Tickets(Resource):
         '''
         # assert that section_id, and concert_id exist
         # assert that the section_id and concert_id are related
+
         assert_msg = ''
         section_resp = section.Section.get_section_by_id(section_id)
         if 'error' in section_resp:
@@ -106,6 +115,18 @@ class Tickets(Resource):
             price_per_ticket=price_per_ticket,
             num_tickets=num_tickets
         )
+
+        # # check if tickets uploaded
+        # if 'file' not in request.files:
+        #     return responses.error('Missing ticket files.', 400)
+        # file = request.files['file']
+        # # if user does not select file, browser also
+        # # submit a empty part without filename
+        # if file.filename == '':
+        #     return responses.error('No selected file.', 400)
+        # if file and allowed_file(file.filename):
+        #     filename = secure_filename(file.filename)
+        #     # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
         if 'error' in created_tickets:
             return responses.error(created_tickets['error'], 500)

@@ -59,18 +59,22 @@ function getConcertInfo(id) {
 }
 
 function postConcertTickets(concertId, sectionId, numberOfTickets, priceOfTickets) {
+    
+    // console.log(ticketFiles);
+
 
     const url = API_URL+"concerts/"+String(concertId)+"/sections/"+String(sectionId)+"/tickets/"
     console.log(url);
+
     return {
         [CALL_API] : {
             method: 'post',
             endpoint: url,
-            data: {
+            body: {
                 price_per_ticket:priceOfTickets,
-                num_tickets:numberOfTickets
+                num_tickets:numberOfTickets,
             },
-            types: [GET_CONCERT_SEARCH_REQUEST, GET_CONCERT_SEARCH_SUCCESS, GET_CONCERT_SEARCH_FAILURE],
+            types: [POST_CONCERT_TICKETS_REQUEST, POST_CONCERT_TICKETS_SUCCESS, POST_CONCERT_TICKETS_FAILURE],
         }
     }
 }
