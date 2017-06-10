@@ -31,6 +31,7 @@ const rootReducer = combineReducers({
     concertQueryApiCall: concertsApiCallReducer,
     concertQuery: concertQueryReducer,
     concertInfoApiCall: concertInfoApiCallReducer,
+    postTickets: postTicketsReducer,
 });
 
 export { rootReducer };
