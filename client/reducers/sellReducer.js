@@ -76,9 +76,36 @@ var concertQueryReducer = function(state={}, action) {
     }
 };
 
+var postTicketsReducer = function(state={}, action) {
+    switch (action.type) {
+        case actionTypes.POST_CONCERT_TICKETS_REQUEST:
+            var newState = Immutable.fromJS(state);
+            newState = newState.toJS();
+            newState.loading = true;
+            return newState;
+        case actionTypes.POST_CONCERT_TICKETS_SUCCESS:
+            var newState = Immutable.fromJS(state);
+            newState = newState.toJS();
+            newState.loading = false;
+            newState.loaded = true;
+            return newState;
+        case actionTypes.POST_CONCERT_TICKETS_FAILURE:
+            var newState = Immutable.fromJS(state);
+            newState = newState.toJS();
+            newState.loading = false;
+            newState.error = true;
+            return newState;
+        default:
+            var newState = Immutable.fromJS(state);
+            newState = newState.toJS();
+            return newState;
+    }
+};
+
 
 export {
     concertsApiCallReducer,
     concertQueryReducer,
-    concertInfoApiCallReducer
+    concertInfoApiCallReducer,
+    postTicketsReducer
 }

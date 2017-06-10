@@ -13,7 +13,8 @@ import {
 import {
     concertsApiCallReducer,
     concertQueryReducer,
-    concertInfoApiCallReducer
+    concertInfoApiCallReducer,
+    postTicketsReducer
 } from './sellReducer.js';
 
 import { reducer as formReducer } from 'redux-form';
