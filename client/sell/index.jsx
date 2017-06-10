@@ -28,6 +28,7 @@ var initialState = {
         concert: {
         	name: '',
         	date: '',
+            id:'',
         	section_bid_summary: {
         		average_price: 0,
         	},
@@ -44,7 +45,14 @@ var initialState = {
         		sections: [{name:''}]
         	}
         },
-	}
+	},
+    postTickets: {
+        loading: true,
+        loaded: false,
+        error: false,
+        errorMessage: '',
+        successMessage: '',
+    }
 }
 
 var store = configureStore(initialState);

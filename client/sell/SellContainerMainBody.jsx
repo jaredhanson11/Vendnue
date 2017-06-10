@@ -15,7 +15,16 @@ export default class SellContainerMainBody extends React.Component{
 
 
     handleSubmit(event) {
-        console.log(event);
+        event.preventDefault();
+        const concertId = event.target.concert.value;
+        const sectionId = event.target.section.value;
+        const numberOfTickets = event.target.number.value;
+        const priceOfTickets = event.target.price.value;
+        console.log(concertId);
+        console.log(sectionId);
+        console.log(numberOfTickets);
+        console.log(priceOfTickets);
+        this.props.postConcertTickets(concertId,sectionId,numberOfTickets,priceOfTickets);
     }
 
     render(){
@@ -34,6 +43,8 @@ export default class SellContainerMainBody extends React.Component{
             </div>
         );
 
+        const maxNumberOfTickets = 12;
+
         const middle = (
             <div>
                 <Loader loaded={!this.props.concertInfoApiCall.loading} >
@@ -47,12 +58,19 @@ export default class SellContainerMainBody extends React.Component{
                             <div>Average Successful Section Bid: {this.props.concertInfoApiCall.concert.cleared_section_bid_summary.average_price}</div>
 
                     <form onSubmit={this.handleSubmit.bind(this)}>
+                        Sell Your Tickets: <br/>
+
+                        <input hidden name="concert" value={this.props.concertInfoApiCall.concert.id} />
+
                         Section: <select name="section">
                             {this.props.concertInfoApiCall.concert.map.sections.map((x) => <option value={x.id}>{x.name}</option>)}
-                        </select>
+                        </select><br/>
+
                         Number of Tickets: <select name="number">
-                            {[1,2,3,4,5,6,7,8,9,10,11,12].map((x) => <option value={x}>{x}</option>)}
-                        </select>
+                            {[...Array(maxNumberOfTickets).keys()].map((x) => <option value={x}>{x}</option>)}
+                        </select><br/>
+
+                        Price: <input type="text" name="price" /><br/>
                         
                         <input type="submit" value="Submit" />
                     </form>
@@ -62,10 +80,18 @@ export default class SellContainerMainBody extends React.Component{
             </div>
         );
 
+        const end = (
+            <div>{this.props.postTickets}</div>
+        );
+
         let buffer = [top];
 
         if (this.props.concertQuery.selected) {
             buffer.push(middle);
+        }
+
+        if (this.props.postTickets.loaded) {
+            buffer.push(end);
         }
 
         return <div>{buffer}</div>;

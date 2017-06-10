@@ -28,12 +28,16 @@ class SellContainer extends React.Component {
         this.props.dispatch(actionCreators.selectQuery());
     }
 
+    postConcertTickets(concertId, sectionId, numberOfTickets, priceOfTickets) {
+        this.props.dispatch(actionCreators.postConcertTickets(concertId,sectionId,numberOfTickets,priceOfTickets));
+    }
+
     render(){
         return (
            <Grid style={jsCSS.mainContainer}>
                 <SellContainerMainBody concertQueryApiCall={this.props.concertQueryApiCall} enterQuery={this.enterQuery.bind(this)} 
                 concertQuery={this.props.concertQuery} getConcertInfo={this.getConcertInfo.bind(this)} selectQuery={this.selectQuery.bind(this)} 
-                concertInfoApiCall={this.props.concertInfoApiCall}/>
+                concertInfoApiCall={this.props.concertInfoApiCall} postConcertTickets={this.postConcertTickets.bind(this)} postTickets={this.props.postTickets}/>
            </Grid>
         )
     }
