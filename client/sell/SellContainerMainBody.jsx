@@ -13,21 +13,30 @@ import { sellContainerMainBodyStyle as jsCSS } from '../static/js/style.js';
 
 export default class SellContainerMainBody extends React.Component{
 
-    handleSubmit(event) {
-        event.preventDefault();
-        const concertId = event.target.concert.value;
-        const sectionId = event.target.section.value;
-        const numberOfTickets = event.target.number.value;
-        const priceOfTickets = event.target.price.value;
-        // const ticketFile = event.target.ticketFiles.value;
-        // let ticketFileData = new FormData();
-        // ticketFileData.append('file', ticketFile);
-        this.props.postConcertTickets(concertId,sectionId,numberOfTickets,priceOfTickets);
+    constructor(props) {
+      super(props);
+      this.state = {
+        section: 0,
+        price: 0,
+        number: 0,
+      };
     }
 
-    // handle(file) {
-    //     console.log(file);
-    // }
+    handleSubmit(event) {
+
+        console.log(this.state);
+
+        const concertId = this.props.concertInfoApiCall.concert.id;
+        const sectionId = this.state.section;
+        const price = this.state.price;
+        const number = this.state.number;
+
+        this.props.postConcertTickets(concertId,sectionId,number,price);
+    }
+
+    handleChange(event) {
+        this.setState({[event.target.name] : event.target.value});
+    }
 
     render(){
 
@@ -58,24 +67,23 @@ export default class SellContainerMainBody extends React.Component{
                             <div>Average Sold Ticket Price: {this.props.concertInfoApiCall.concert.sold_ticket_summary.average_sold_ticket_price}</div>
                             <div>Average Section Bid: {this.props.concertInfoApiCall.concert.section_bid_summary.average_price}</div>
                             <div>Average Successful Section Bid: {this.props.concertInfoApiCall.concert.cleared_section_bid_summary.average_price}</div>
+            
+            <input hidden name="concert" value={this.props.concertInfoApiCall.concert.id} />
 
-                    <form encType="multipart/form-data" onSubmit={this.handleSubmit.bind(this)}>
                         Sell Your Tickets: <br/>
 
-                        <input hidden name="concert" value={this.props.concertInfoApiCall.concert.id} />
-
-                        Section: <select name="section">
+                        Section: <select name="section" onChange={this.handleChange.bind(this)}>
                             {this.props.concertInfoApiCall.concert.map.sections.map((x) => <option value={x.id}>{x.name}</option>)}
                         </select><br/>
 
-                        Price: <input type="text" name="price" /><br/>
+                        Price: <input type="text" name="price" onChange={this.handleChange.bind(this)}/><br/>
 
-                        Number of Tickets: <select name="number">
+                        Number of Tickets: <select name="number" onChange={this.handleChange.bind(this)}>
                             {[...Array(maxNumberOfTickets).keys()].map((x) => <option value={x}>{x}</option>)}
                         </select><br/>
 
-                        <input type="submit" value="Submit"/>
-                    </form>
+                        <button type="submit" onClick={this.handleSubmit.bind(this)}>enter</button>
+
                       </Col>
                     </Row>
                 </Loader>
